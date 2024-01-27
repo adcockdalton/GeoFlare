@@ -1,4 +1,8 @@
-import React from "react";
+"use client"
+
+import React, {useMemo} from "react";
+// import type { NextPage } from "next";
+// import styles from "../styles/Home.module.css";
 import Badge from "@/components/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -12,7 +16,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-// import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -21,12 +24,37 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+// import { Loader } from "@googlemaps/js-api-loader";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
+  const mapCenter = useMemo(
+    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
+    
+    [],
+  );
+
+  const mapOptions = useMemo<google.maps.MapOptions>(
+    () => ({
+      disableDefaultUI: true,
+      mapTypeId:"satellite",
+      clickableIcons: true,
+      scrollwheel: false,
+    }),
+    [],
+  );
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
+  });
+
+  if (!isLoaded) {
+    return <p>Loading...</p>;
+  }
   return (
-    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full gap-4">
-      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl ">
+    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full gap-4 w-full relative overflow-none">
+      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4   rounded-s-xl rounded-e-xl z-20">
         <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
           Live Chat
         </CardTitle>
@@ -102,6 +130,16 @@ function Map() {
             </Button>
           </div>
         </CardContent>
+      </div>
+      <div className="rounded-xl ">
+        <GoogleMap
+          options={mapOptions}
+          zoom={14}
+          center={mapCenter}
+          mapTypeId={google.maps.MapTypeId.SATELLITE}
+          mapContainerStyle={{ width: "100%", height: "100%",position:"absolute",top:0,left:0}}
+          onLoad={() => console.log("Map Component Loaded...")}
+        />
       </div>
       <div className="relative flex h-min">
         <Card className="bg-geo-black border-none">

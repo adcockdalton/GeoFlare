@@ -1,58 +1,50 @@
-'use client';
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 import { ArrowUpRightIcon } from "lucide-react";
-import { motion } from "framer-motion"
 import { TypeAnimation } from "react-type-animation";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 import { useInView } from 'react-intersection-observer';
 // import Logo from "../../public/geoFlareLogo.svg"
-import './global.sass'
+import "./global.sass";
 
 export default function Home() {
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger once
   });
-  return (<><nav>
+  return (
+    <>
+      <nav>
         <ul className="flex-row">
           <div className="nav-sides" style={{borderRight: '1px solid #fff', paddingRight:'28px'}}>
             <img src='./geoFlareLogo.svg' alt="" style={{maxWidth:'150px'}}/>
           </div>
-          
-          <li className="flex-row">
 
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          <li className="flex-row">
+            <a href="#" target="_blank" rel="noopener noreferrer">
               About us
             </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               Features
             </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="#" target="_blank" rel="noopener noreferrer">
               Pricing
             </a>
           </li>
-          <div className="nav-sides"  style={{borderLeft: '1px solid #fff', paddingLeft:'28px'}}>
+          <div
+            className="nav-sides"
+            style={{ borderLeft: "1px solid #fff", paddingLeft: "28px" }}
+          >
             {/* Sign up  */}
-          <button className="special">
-            Sign up
-            <FontAwesomeIcon icon={faArrowRight}/>
-          </button>
-         
+            <button className="special">
+              Sign up
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
           </div>
-          
         </ul>
       </nav>
       
