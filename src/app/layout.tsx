@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import "./globals.css";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { Home, Map } from "lucide-react";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const alliance = localFont({
+  src: "/font/AllianceNo1-Regular.ttf",
+  display: "swap",
+  variable: "--font-alliance",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -24,14 +26,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className)}>
+      <body className={alliance.className}>
         <main className="h-screen flex w-full relative">
-          <div className=" flex w-min bg-white flex-col py-32 px-4 gap-4">
+          <div className=" flex w-min bg-geo-black flex-col py-32 px-2 gap-4 items-center">
             <Link href={"/home"}>
-              <Home size={50}></Home>
+              <Home
+                size={40}
+                fill="white"
+                stroke="none"
+                className="bg-geo-light rounded-lg p-1"
+              ></Home>
             </Link>
             <Link href={"/browse"}>
-              <Map size={50}></Map>
+              <Map
+                size={40}
+                fill="white"
+                stroke="none"
+                className="bg-geo-light rounded-lg p-1"
+              ></Map>
             </Link>
           </div>
           <div className="flex-1">{children}</div>

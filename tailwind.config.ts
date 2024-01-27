@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-alliance)", "helvetica", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -56,7 +59,9 @@ const config = {
           DEFAULT: "#885EFF",
           black: "#1E1E1E",
           grey: "#313131",
-          blue: "##2723FF",
+          dark: "#1C1F21",
+          light: "#4A4E65",
+          blue: "#2723FF",
           teal: "#30DAFF",
           white: "#F0F2F6",
         },
