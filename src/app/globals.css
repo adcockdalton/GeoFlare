@@ -75,7 +75,6 @@
   }
 }
 
-
 .warning-image-button {
   display: inline-block;
   padding: 1px; /* Add padding to the button */
@@ -84,13 +83,12 @@
   cursor: pointer;
 }
 
-
 .warning-image-button::before {
   content: "";
   display: block;
-  width: 25px; 
-  height: 50px; 
-  background: url("warning_symbol.svg") no-repeat center center;
+  width: 25px;
+  height: 50px;
+  background: url("../../public/warning_symbol.svg") no-repeat center center;
   background-size: contain;
 }
 
@@ -102,12 +100,11 @@
   cursor: pointer;
 }
 
-
 .house-image-button::before {
   content: "";
   display: block;
-  width: 400px; 
-  height: 500px; 
-  background: url("house.svg") no-repeat center center;
+  width: 400px;
+  height: 500px;
+  background: url("../../public/house.svg") no-repeat center center;
   background-size: contain;
 }

@@ -3,9 +3,9 @@ import localFont from "next/font/local";
 
 import "./globals.css";
 
+import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Home, Map } from "lucide-react";
+import { Map } from "lucide-react";
 
 const alliance = localFont({
   src: [
@@ -36,12 +36,22 @@ export default function RootLayout({
         <main className="h-screen flex w-full relative">
           <div className=" flex w-min bg-geo-black flex-col py-32 px-2 gap-4 items-center">
             <Link href={"/home"}>
-              <Home
-                size={40}
-                fill="white"
-                stroke="none"
-                className="bg-geo-grey rounded-lg p-2"
-              ></Home>
+              <Image
+                width={40}
+                height={40}
+                className="relative bottom-20"
+                src="/logo.svg"
+                alt="home"
+              ></Image>
+            </Link>
+            <Link href={"/home"}>
+              <Image
+                width={40}
+                height={40}
+                className="bg-geo-grey rounded-lg p-2 aspect-square "
+                src="/houseicon.svg"
+                alt="home"
+              ></Image>
             </Link>
             <Link href={"/browse"}>
               <Map
@@ -53,7 +63,7 @@ export default function RootLayout({
             </Link>
           </div>
           <div className="flex flex-1 flex-col bg-geo-black h-full pr-4 pb-4">
-            <div className="flex justify-between my-2">
+            <div className="flex justify-between my-3">
               <h2 className="text-white  font-semibold ">
                 Petr Avenue, Irvine California
               </h2>
