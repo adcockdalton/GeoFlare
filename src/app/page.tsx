@@ -11,8 +11,6 @@ import { TypeAnimation } from "react-type-animation";
 // import Logo from "../../public/geoFlareLogo.svg"
 import "./global.sass";
 
-import Tag from "@/components/ui/Tag";
-
 export default function Home() {
   return (
     <>
@@ -79,7 +77,6 @@ export default function Home() {
                     1500,
                   ]}
                   wrapper="span"
-                  speed={150}
                   repeat={Infinity}
                 />
               </span>
