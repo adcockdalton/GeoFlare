@@ -37,10 +37,10 @@ export default function RootLayout({
           <div className=" flex w-min bg-geo-black flex-col py-32 px-2 gap-4 items-center">
             <Link href={"/home"}>
               <Image
-                width={40}
-                height={40}
+                width={30}
+                height={30}
                 className="relative bottom-20"
-                src="/logo.svg"
+                src="/logo2.svg"
                 alt="home"
               ></Image>
             </Link>
