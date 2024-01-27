@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 // import type { NextPage } from "next";
 // import styles from "../styles/Home.module.css";
 import Badge from "@/components/badge";
@@ -25,20 +25,38 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import {
+  CircleF,
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+} from "@react-google-maps/api";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
-  const mapCenter = useMemo(
-    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
-    
+  const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
+    "places",
+  ];
+  const mapCenter = useMemo(() => ({ lat: 33.739755, lng: -117.751285 }), []);
+  const house1Center = useMemo(
+    () => ({ lat: 33.73753232504521, lng: -117.75110662338541 }),
+    [],
+  );
+
+  const house2Center = useMemo(
+    () => ({ lat: 33.73921856606024, lng: -117.7532953058211 }),
+    [],
+  );
+
+  const schoolCenter = useMemo(
+    () => ({ lat: 33.73397237402972, lng: -117.75041997787818 }),
     [],
   );
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
-      mapTypeId:"satellite",
+      mapTypeId: "satellite",
       clickableIcons: true,
       scrollwheel: false,
     }),
@@ -47,6 +65,7 @@ function Map() {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
+    libraries,
   });
 
   if (!isLoaded) {
@@ -134,12 +153,53 @@ function Map() {
       <div className="rounded-xl ">
         <GoogleMap
           options={mapOptions}
-          zoom={14}
+          zoom={15}
           center={mapCenter}
           mapTypeId={google.maps.MapTypeId.SATELLITE}
-          mapContainerStyle={{ width: "100%", height: "100%",position:"absolute",top:0,left:0}}
+          mapContainerStyle={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
           onLoad={() => console.log("Map Component Loaded...")}
-        />
+        >
+          <MarkerF
+            position={mapCenter}
+            onLoad={() => console.log("Marker Loaded")}
+          />
+
+          <MarkerF
+            position={house1Center}
+            onLoad={() => console.log("Marker Loaded")}
+          />
+
+          <MarkerF
+            position={house2Center}
+            onLoad={() => console.log("Marker Loaded")}
+          />
+
+          <MarkerF
+            position={schoolCenter}
+            onLoad={() => console.log("Marker Loaded")}
+          />
+          {[1000, 2200].map((radius, idx) => {
+            return (
+              <CircleF
+                key={idx}
+                center={mapCenter}
+                radius={radius}
+                onLoad={() => console.log("Circle Load...")}
+                options={{
+                  fillColor: radius > 1000 ? "green" : "red",
+                  strokeColor: radius > 1000 ? "green" : "red",
+                  strokeOpacity: 0.8,
+                }}
+              />
+            );
+          })}
+        </GoogleMap>
       </div>
       <div className="relative flex h-min">
         <Card className="bg-geo-black border-none">
