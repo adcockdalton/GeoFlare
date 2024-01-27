@@ -8,7 +8,7 @@ import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
   return (
-    <main className="flexbg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full">
+    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full">
       <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl">
         <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
           Live Chat
