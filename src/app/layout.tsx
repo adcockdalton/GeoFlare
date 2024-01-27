@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 
-import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Home, Map } from "lucide-react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,10 +13,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'GeoFlare',
-  description: 'Wildfire fighting tool powered by AI.',
-}
- 
+  title: "GeoFlare",
+  description: "Wildfire fighting tool powered by AI.",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -23,25 +24,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={cn(inter.className)}>
-          <main className="h-screen flex w-full relative">
-                <div className="flex gap-2 absolute left-4 top-8 items-center">
-                  <Image
-                    src={"/logo.svg"}
-                    width={60}
-                    alt="geoflare logo"
-                    height={60}
-                    className=""
-                  />
-                  <h1 className="text-2xl font-extrabold">GeoFlare</h1>
-                </div>
-                <div className=" flex w-1/6 bg-white flex-col py-32 px-4 gap-4">
-                </div>
-           
-            <div className="flex-1 py-8 pr-8">{children}</div>
-          </main>
-        </body>
-
+      <body className={cn(inter.className)}>
+        <main className="h-screen flex w-full relative">
+          <div className=" flex w-min bg-white flex-col py-32 px-4 gap-4">
+            <Link href={"/home"}>
+              <Home size={50}></Home>
+            </Link>
+            <Link href={"/browse"}>
+              <Map size={50}></Map>
+            </Link>
+          </div>
+          <div className="flex-1">{children}</div>
+        </main>
+      </body>
     </html>
   );
 }
