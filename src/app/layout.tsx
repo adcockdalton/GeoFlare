@@ -3,10 +3,7 @@ import localFont from "next/font/local";
 
 import "./globals.css";
 
-import Image from "next/image";
-import Link from "next/link";
 import Wrapper from "./wrapper";
-import { Map } from "lucide-react";
 
 const alliance = localFont({
   src: [

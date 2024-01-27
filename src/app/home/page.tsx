@@ -1,33 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Badge from "@/components/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { AlertTriangle, Clock, FileWarning, HomeIcon } from "lucide-react";
+import { AlertTriangle, Clock, HomeIcon } from "lucide-react";
 
 function Home() {
-  const x = 5;
-
   const router = useRouter();
 
   const handleRedirectClick = (link: string) => {
