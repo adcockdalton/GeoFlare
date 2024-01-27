@@ -12,6 +12,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
 
 function UploadPage() {
     const x = 5
@@ -35,51 +44,84 @@ function UploadPage() {
                     </Button>
                 </div>
             </div>
-            <div className="container flex items-center justify-between p-4">
-                <Card
-                    className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
-                    onClick={() => handleRedirectClick("/unknown")}
-                >
-                    <CardHeader>
-                        <CardTitle>fire location</CardTitle>
-                        <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
-                            fire information and location (melissa)
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex items-end justify-center">
-                    </CardContent>
-                </Card>
+
+            <div>
+                <div className="container flex items-center justify-between p-4">
+                    <Card
+                        className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
+                        onClick={() => handleRedirectClick("/unknown")}
+                    >
+                        <CardHeader>
+                            <CardTitle>fire location</CardTitle>
+                            <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
+                                fire information and location (melissa)
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex items-end justify-center">
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="container flex items-center justify-between p-4">
+                    <Card
+                        className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
+                        onClick={() => handleRedirectClick("/unknown")}
+                    >
+                        <CardHeader>
+                            <CardTitle>fire location</CardTitle>
+                            <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
+                                fire information and location (melissa)
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex items-end justify-center">
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="container flex items-center justify-between p-4">
+                    <Card
+                        className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
+                        onClick={() => handleRedirectClick("/unknown")}
+                    >
+                        <CardHeader>
+                            <CardTitle>fire location</CardTitle>
+                            <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
+                                fire information and location (melissa)
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex items-end justify-center">
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
 
-            <div className="container flex items-center justify-between p-4">
-                <Card
-                    className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
-                    onClick={() => handleRedirectClick("/unknown")}
-                >
+            <div className="container flex items-center justify-between">
+                <Card>
+                    <CardContent className="flex items-center h-96">
+                        <button className="house-image-button"></button>
+                    </CardContent>
                     <CardHeader>
-                        <CardTitle>fire location</CardTitle>
-                        <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
-                            fire information and location (melissa)
+                        <CardTitle>6996 Petr Avenue, Irvine CA</CardTitle>
+                        <CardDescription className="flex items-center">
+                                <button className="warning-image-button"></button>
+                                <span className="ml-2">moderate risk</span>
                         </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex items-end justify-center">
-                    </CardContent>
-                </Card>
-            </div>
+                    <CardFooter className="m-1">
+                        <Table>
+                            <TableBody>
+                                <TableRow className="shadow rounded-lg">
+                                    <TableCell className="font-medium">size</TableCell>
+                                    <TableCell className="text-right">240sqft</TableCell>
+                                </TableRow>
+                                <TableRow className="shadow rounded-lg">
+                                    <TableCell className="font-medium">type</TableCell>
+                                    <TableCell className="text-right">Townhouse</TableCell>
+                                </TableRow>
 
-            <div className="container flex items-center justify-between p-4">
-                <Card
-                    className="w-full relative h-[22rem] bg-gray-100 cursor-pointer hover:shadow-md dark:text-black dark:brightness-90 p-2"
-                    onClick={() => handleRedirectClick("/unknown")}
-                >
-                    <CardHeader>
-                        <CardTitle>fire location</CardTitle>
-                        <CardDescription className="font-medium line-clamp-none md:line-clamp-1 xl:line-clamp-none text-md">
-                            fire information and location (melissa)
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex items-end justify-center">
-                    </CardContent>
+                            </TableBody>
+                        </Table>
+                    </CardFooter>
                 </Card>
             </div>
 

@@ -74,3 +74,40 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.warning-image-button {
+  display: inline-block;
+  padding: 1px; /* Add padding to the button */
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
+.warning-image-button::before {
+  content: "";
+  display: block;
+  width: 25px; 
+  height: 50px; 
+  background: url("warning_symbol.svg") no-repeat center center;
+  background-size: contain;
+}
+
+.house-image-button {
+  display: inline-block;
+  padding: 1px; /* Add padding to the button */
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
+.house-image-button::before {
+  content: "";
+  display: block;
+  width: 400px; 
+  height: 500px; 
+  background: url("house.svg") no-repeat center center;
+  background-size: contain;
+}
