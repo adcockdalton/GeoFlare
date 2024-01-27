@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={alliance.className}>
-        <main className="h-screen flex w-full relative">
+        <main className="flex w-full relative overflow-y-auto">
           <div className=" flex w-min bg-geo-black flex-col py-32 px-2 gap-4 items-center">
             <Link href={"/home"}>
               <Image
@@ -62,7 +62,7 @@ export default function RootLayout({
               ></Map>
             </Link>
           </div>
-          <div className="flex flex-1 flex-col bg-geo-black h-full pr-4 pb-4">
+          <div className="flex flex-1 flex-col bg-geo-black pr-4 pb-4">
             <div className="flex justify-between my-3">
               <h2 className="text-white  font-semibold ">
                 Petr Avenue, Irvine California
@@ -75,6 +75,6 @@ export default function RootLayout({
           </div>
         </main>
       </body>
-    </html>
+    </html >
   );
 }

@@ -3,16 +3,18 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Home() {
   return (
-    <main className="flex  relative  bg-geo-grey px-8 pb-8  rounded-xl flex-1 pt-16">
+    <main className="flex h-full relative  bg-geo-grey px-8 pb-8  rounded-xl flex-1 pt-16">
       <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl">
         <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
           Live Chat
         </CardTitle>
         <CardContent className="flex flex-col h-full justify-between py-0">
+        <ScrollArea className="h-full">
           <div className="flex flex-col gap-4">
             <div className="flex gap-2 items-center">
               <Avatar className="bg-slate-400 w-6 h-6 rounded-full"> </Avatar>
@@ -70,6 +72,7 @@ function Home() {
               </Button>
             </div>
           </div>
+          </ScrollArea>
           <div className="flex gap-2">
             <Input
               className="gap-4 text-geo-white rounded-lg bg-geo-grey border-none text-lg py-6 placeholder-gray-800"
