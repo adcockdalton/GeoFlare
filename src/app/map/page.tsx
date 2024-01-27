@@ -1,4 +1,5 @@
 import React from "react";
+import Badge from "@/components/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,25 +9,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 // import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/components/ui/table";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
   return (
-    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full">
-      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl">
+    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full gap-4">
+      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl ">
         <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
           Live Chat
         </CardTitle>
@@ -103,20 +103,22 @@ function Map() {
           </div>
         </CardContent>
       </div>
-      <div className="relative container flex items-center justify-between">
-        <Card>
+      <div className="relative flex h-min">
+        <Card className="bg-geo-black border-none">
           <CardContent className="flex items-center h-48">
             <button className="flex house-image-button"></button>
           </CardContent>
           <CardHeader>
-            <CardTitle className="flex w-40">6996 Petr Avenue, Irvine CA</CardTitle>
+            <CardTitle className="flex w-40 text-white">
+              6996 Petr Avenue, Irvine CA
+            </CardTitle>
             <CardDescription className="flex items-center">
               <button className="warning-image-button"></button>
-              <span className="ml-2">moderate risk</span>
+              <span className="ml-2 text-yellow">moderate risk</span>
             </CardDescription>
           </CardHeader>
           <CardFooter className=" flex m-1">
-            <Table className="flex">
+            <Table className="flex text-white">
               <TableBody>
                 <TableRow className="shadow rounded-lg">
                   <TableCell className="font-medium">size</TableCell>
@@ -126,19 +128,16 @@ function Map() {
                   <TableCell className="font-medium">type</TableCell>
                   <TableCell className="text-right">Townhouse</TableCell>
                 </TableRow>
-
               </TableBody>
             </Table>
           </CardFooter>
         </Card>
       </div>
-      <div className="container relative flex items-center justify-between p-4">
-        <Card>
-          <CardContent className="flex items-center h-12">
-            <p> Risk rating</p>
-          </CardContent>
+      <div className="relative flex h-min">
+        <Card className="bg-geo-black border-none">
           <CardHeader>
-            <CardTitle>Moderate Risk</CardTitle>
+            <Badge text="Risk rating"></Badge>
+            <CardTitle className="text-white">Moderate Risk</CardTitle>
           </CardHeader>
           <CardFooter className="m-1">
             <Table>
@@ -156,7 +155,7 @@ function Map() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow className="shadow rounded-lg">
+                <TableRow className="shadow rounded-lg text-white">
                   <TableCell className="font-medium">harsh</TableCell>
                   <TableCell className="font-medium">24km</TableCell>
                   <TableCell className="font-medium">4min</TableCell>
