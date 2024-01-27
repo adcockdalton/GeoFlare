@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-alliance)", "helvetica", "sans-serif"],
+        sans: ["var(--font-alliance)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,13 +57,14 @@ const config = {
         },
         geo: {
           DEFAULT: "#885EFF",
-          black: "#1E1E1E",
+          black: "#14171A",
           grey: "#313131",
           dark: "#1C1F21",
           light: "#4A4E65",
           blue: "#2723FF",
-          teal: "#30DAFF",
+          teal: "#12BADF",
           white: "#F0F2F6",
+          someotherfuckignshadeofgrey: "#1f2b30",
         },
       },
       borderRadius: {
