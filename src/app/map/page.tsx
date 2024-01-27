@@ -1,15 +1,32 @@
 import React from "react";
+import Badge from "@/components/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+// import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
   return (
-    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full">
-      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl">
+    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full gap-4">
+      <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-e-xl rounded-bl-xl ">
         <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
           Live Chat
         </CardTitle>
@@ -85,6 +102,68 @@ function Map() {
             </Button>
           </div>
         </CardContent>
+      </div>
+      <div className="relative flex h-min">
+        <Card className="bg-geo-black border-none">
+          <CardContent className="flex items-center h-48">
+            <button className="flex house-image-button"></button>
+          </CardContent>
+          <CardHeader>
+            <CardTitle className="flex w-40 text-white">
+              6996 Petr Avenue, Irvine CA
+            </CardTitle>
+            <CardDescription className="flex items-center">
+              <button className="warning-image-button"></button>
+              <span className="ml-2 text-yellow">moderate risk</span>
+            </CardDescription>
+          </CardHeader>
+          <CardFooter className=" flex m-1">
+            <Table className="flex text-white">
+              <TableBody>
+                <TableRow className="shadow rounded-lg">
+                  <TableCell className="font-medium">size</TableCell>
+                  <TableCell className="text-right">240sqft</TableCell>
+                </TableRow>
+                <TableRow className="shadow rounded-lg">
+                  <TableCell className="font-medium">type</TableCell>
+                  <TableCell className="text-right">Townhouse</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardFooter>
+        </Card>
+      </div>
+      <div className="relative flex h-min">
+        <Card className="bg-geo-black border-none">
+          <CardHeader>
+            <Badge text="Risk rating"></Badge>
+            <CardTitle className="text-white">Moderate Risk</CardTitle>
+          </CardHeader>
+          <CardFooter className="m-1">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="font-bold custom-text-color">
+                    weather
+                  </TableHead>
+                  <TableHead className="font-bold custom-text-color">
+                    distance from fire
+                  </TableHead>
+                  <TableHead className="font-bold custom-text-color">
+                    time
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow className="shadow rounded-lg text-white">
+                  <TableCell className="font-medium">harsh</TableCell>
+                  <TableCell className="font-medium">24km</TableCell>
+                  <TableCell className="font-medium">4min</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardFooter>
+        </Card>
       </div>
       <Button className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8">
         <Route></Route>Generate Optimal Route
