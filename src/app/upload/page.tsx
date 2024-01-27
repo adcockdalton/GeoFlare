@@ -125,9 +125,9 @@ function UploadPage() {
                 </Card>
             </div>
 
-            <div className="container flex items-center justify-between">
+            <div className="container flex items-center justify-between p-4">
                 <Card>
-                    <CardContent className="flex items-center h-24">
+                    <CardContent className="flex items-center h-12">
                         <p> Risk rating</p>
                     </CardContent>
                     <CardHeader>
@@ -140,7 +140,9 @@ function UploadPage() {
                                     <TableHead className="font-bold custom-text-color">
                                         weather
                                     </TableHead>
-                                    <TableHead>distance from fire</TableHead>
+                                    <TableHead className="font-bold custom-text-color">
+                                        distance from fire
+                                    </TableHead>
                                     <TableHead className="font-bold custom-text-color">
                                         time
                                     </TableHead>
@@ -149,7 +151,7 @@ function UploadPage() {
                             <TableBody>
                                 <TableRow className="shadow rounded-lg">
                                     <TableCell className="font-medium">harsh</TableCell>
-                                    <TableCell className="text-right">24km</TableCell>
+                                    <TableCell className="font-medium">24km</TableCell>
                                     <TableCell className="font-medium">4min</TableCell>
                                 </TableRow>
                             </TableBody>
