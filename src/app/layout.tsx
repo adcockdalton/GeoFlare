@@ -9,11 +9,11 @@ import { Map } from "lucide-react";
 
 const alliance = localFont({
   src: [
-    { path: "/font/AllianceNo1-Regular.ttf", weight: "400", style: "normal" },
-    { path: "/font/AllianceNo1-Bold.ttf", weight: "700", style: "normal" },
-    { path: "/font/AllianceNo1-Medium.ttf", weight: "500", style: "normal" },
-    { path: "/font/AllianceNo1-SemiBold.ttf", weight: "600", style: "normal" },
-    { path: "/font/AllianceNo1-Light.ttf", weight: "300", style: "normal" },
+    { path: "/font/AllianceNo2-Regular.ttf", weight: "400", style: "normal" },
+    { path: "/font/AllianceNo2-Bold.ttf", weight: "700", style: "normal" },
+    { path: "/font/AllianceNo2-Medium.ttf", weight: "500", style: "normal" },
+    { path: "/font/AllianceNo2-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "/font/AllianceNo2-Light.ttf", weight: "300", style: "normal" },
   ],
   display: "swap",
   variable: "--font-alliance",
@@ -53,7 +53,7 @@ export default function RootLayout({
                 alt="home"
               ></Image>
             </Link>
-            <Link href={"/browse"}>
+            <Link href={"/map"}>
               <Map
                 size={40}
                 fill="white"
