@@ -1,0 +1,251 @@
+//* root element styling
+
+//! colors
+$light-bg: #14171A 
+$dark-bg: #14171A
+$text-color: #fff 
+$prim: #12BADF
+$hover-prim: #1E90A9
+$sec: #272E35 
+$hover-sec: #0F1214
+$link: #fff
+$linkHover: #12BADF
+$navBackground: $dark-bg
+//! text
+$buttons: 24px
+$spanText: blue
+h1
+  font-size: 54px
+  color: $text-color
+  font-weight: 600
+  line-height: 1.2
+  & span
+    color: $prim
+h2
+  font-size: 28px
+  color: $text-color
+  font-weight: 800
+  &span 
+    color: $spanText
+h3
+    font-size: 28px
+    color: rgba(255, 255, 255, .75)
+
+//! animations
+$hoverAnimate: background-color 200ms ease-in-out
+
+//* core elements
+html,
+body  
+  margin: 0 
+  overflow-x: hidden 
+  background-color: $dark-bg
+  font-family: 'Alliance No.1', sans-serif
+
+//* light and dark mode
+@mixin color-themes($theme)  
+  @if $theme == "light"  
+    background-color: $light-bg
+  @else  
+    background-color: $dark-bg
+
+ 
+
+//* reuseable props
+@mixin grid  
+  display: grid 
+  place-content: center 
+ 
+@mixin grid-row  
+  @include grid 
+  display: grid 
+  grid-template-columns: repeat(3, 1fr) 
+  align-items: center 
+  justify-content: center 
+ 
+@mixin grid-column  
+  @include grid 
+  display: grid 
+  grid-template-columns: auto 
+  align-items: center 
+  justify-content: center 
+ 
+
+@mixin flex  
+  display: flex 
+  justify-content: center 
+  align-items: center 
+ 
+@mixin flex-row  
+  @include flex 
+  flex-direction: row 
+  justify-content: space-between 
+ 
+@mixin flex-column  
+  @include flex 
+  flex-direction: column 
+ 
+
+//* nav
+nav  
+  width: 100% 
+  height: 80px
+  position: fixed
+  @include flex-row
+  @include flex
+  
+  top: 0
+  background-color: $navBackground
+  backdrop-filter: blur(10px)
+  border-bottom: 1px solid #fff
+  
+  ul  
+    margin: 0 
+    padding: 0 28px 
+    list-style: none 
+    width: 100%
+  li  
+    display: inline-block 
+    max-width: 500px
+  a  
+    display: block 
+    padding: 6px 12px 
+    text-decoration: none 
+    color: $link
+    font-weight: 600
+    &:hover
+      color: $linkHover
+  &.nav-sides
+    display: flex    
+    width: 500px
+    padding: 28px
+    height: 100%
+
+ 
+
+//* general formatting
+.hero
+  height: 100vh
+  width: 100vw
+  padding: 0 5vw
+  justify-content: start
+  display: grid
+  gap: 22px
+  &.container
+    width: 650px
+    position: fixed
+    left:0
+    @include grid
+    
+    @include grid-column
+    gap: 22px
+    align-content: flex-start
+  & h1
+    max-width: 650px
+    flex-wrap: wrap
+.section
+  min-height: 60vh
+  height: fit-content
+.container  
+  @include grid 
+  gap: 18px
+ 
+.flex-row  
+  @include flex 
+  @include flex-row 
+ 
+.flex-column  
+  @include flex 
+  @include flex-column 
+ 
+.grid-row  
+  @include grid 
+  @include grid-row 
+ 
+.grid-column  
+  @include grid 
+  @include grid-column 
+ 
+
+
+
+//* reusable components
+//* regular button
+Button
+    &.primary  
+     background-color: $prim 
+     font-size: $buttons
+  
+     cursor: pointer 
+     @include flex-row
+    
+     padding: 30px 22px 
+     white-space: nowrap 
+     outline: 0 
+     border: 0 
+
+   
+     font-weight: 600
+     color: #fff
+     border-radius: 8px
+     transition: $hoverAnimate
+     &:hover  
+            background-color: $hover-prim 
+    &.secondary  
+     background-color: $sec 
+     font-size: $buttons
+     @include grid 
+     cursor: pointer 
+
+     padding: 30px 22px 
+     white-space: nowrap 
+     outline: 0 
+     border: 0 
+
+     
+     font-weight: 600
+     color: #fff
+     border-radius: 8px
+     transition: $hoverAnimate
+     &:hover  
+            background-color: $hover-sec 
+    &.special 
+        color: $link
+        font-size: 22px
+        white-space: nowrap
+        background-color: none
+        @include flex-row
+        gap: 12px
+        width: 100px
+        transition: 200ms transform ease-in-out
+        &:hover 
+            color: $prim
+
+            & i 
+            transform: translateX(6px)
+
+        
+.row-contain 
+    display: flex
+    flex-direction: row
+    gap: 12px
+   
+ 
+
+//* button with outline
+
+//* commonly used componnets
+  //! color options for tags
+@mixin red 
+  background-color: lighten(red, 40%)
+  color: darken(red, 15%)
+.tag
+  padding: 8px 12px
+  border-radius: 12px
+  white-space: nowrap
+  font-size: 16px
+  font-weight: 600
+  width: fit-content
+  border: 2px solid rgba(255, 255, 255, .1)
+  @include flex-row
+  color: $text-color
