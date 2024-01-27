@@ -13,23 +13,33 @@ $linkHover: #12BADF
 $navBackground: $dark-bg
 //! text
 $buttons: 24px
-$spanText: blue
+$spanText: #fff
 h1
-  font-size: 54px
+  font-size: 62px
   color: $text-color
   font-weight: 600
   line-height: 1.2
   & span
     color: $prim
 h2
-  font-size: 28px
-  color: $text-color
-  font-weight: 800
-  &span 
-    color: $spanText
+  font-size: 52px
+  color: rgba(255, 255, 255, .5)
+  font-weight: 600
+  line-height: 1.2
+  & span 
+    color: #fff
 h3
-    font-size: 28px
-    color: rgba(255, 255, 255, .75)
+  font-size: 28px
+  color: rgba(255, 255, 255, .75)
+h4
+  font-size: 22px
+  font-weight: 600
+  text-align: center
+  color: #fff
+  padding: 2vh 0
+p
+  font-size: 28px
+  font-weight: 600
 
 //! animations
 $hoverAnimate: background-color 200ms ease-in-out
@@ -93,6 +103,7 @@ nav
   position: fixed
   @include flex-row
   @include flex
+  z-index: 1000
   
   top: 0
   background-color: $navBackground
@@ -127,12 +138,13 @@ nav
 .hero
   height: 100vh
   width: 100vw
-  padding: 0 5vw
   justify-content: start
   display: grid
-  gap: 22px
+  align-content: center
+  @include flex-row
+  
   &.container
-    width: 650px
+    // width: 650px
     position: fixed
     left:0
     @include grid
@@ -143,8 +155,116 @@ nav
   & h1
     max-width: 650px
     flex-wrap: wrap
+.about
+  width: 100vw
+  height: 100vh
+  padding: 10vh 0
+  @include grid
+  & h2
+    padding: 5vh 0
+.callout
+  background-color: #1A1C1E
+  padding: 15vh 0
+  margin: 5vh 0
+  @include grid
+  & h1
+    text-align: center
+  & .container
+    @include flex
+    gap: 36px
+    @include flex-column
+.CTA
+  @include grid
+  @include grid-column
+  & .container
+    z-index: 999
+    width: 700px
+    height: 80vh
+    align-content: center
+    justify-content: center
+    display: flex
+    flex-direction: column
+    & .row-contain
+        align-content: center
+        justify-content: center
+        display: flex
+        
+    & p
+      
+      text-align: center
+    & .primary
+      color: #fff
+    & .secondary
+      color: #fff
+  & img
+    position: absolute
+  
+  & h1
+    text-align: center
+.features
+  width: 100vw
+  padding: 5vh 0
+  height: fit-content
+  gap: 12px
+  @include grid
+  & .grid
+    display: grid
+    gap: 36px
+    margin: 5vh 0
+    width: 90%
+    grid-template-columns: 60fr 40fr
+  
+  & p
+    color: rgba(255, 255, 255, .5)
+    text-align: center
+  & h2
+    color: #fff
+    text-align: center
+    & span
+      color: $prim
+  & .container
+    @include flex
+    @include flex-column
+    align-content: center
+    justify-content: center  
+  & img
+    width: 100%  
+
+.grid-two
+    display: grid
+    gap: 36px
+    grid-template-columns: 65fr 35fr
+    width: 90%
+.feature-item
+  border: 2px solid rgba(255, 255, 255, 0.25)
+  background-color: #1C1F21
+  @include grid
+  @include grid-column
+  width: 100%
+  gap: 12px
+  border-radius: 12px
+  padding: 18px
+  transition: 200ms transform ease-in-out
+  opacity: .6
+  & h3
+    text-align: center
+    font-size: 36px
+    color: #fff
+    
+  & p
+    text-align: center
+    font-size: 22px
+  img
+    max-height: 290px
+    width: 100%
+    
+  &:hover
+      cursor: pointer
+      transform: scale(1.05)
+      border: 2px solid $prim
+      opacity: 1
 .section
-  min-height: 60vh
+  min-height: 70vh
   height: fit-content
 .container  
   @include grid 
@@ -249,3 +369,13 @@ Button
   border: 2px solid rgba(255, 255, 255, .1)
   @include flex-row
   color: $text-color
+
+//* footer
+  .footer
+    height: 10vh
+    @include flex
+    width: 100vw
+    padding: 12px
+    font-size: 16px
+    color: #fff
+    text-align: center
