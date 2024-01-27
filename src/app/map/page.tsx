@@ -32,6 +32,7 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import { Clock, Route, SendHorizontal } from "lucide-react";
+import { useMutation } from "react-query";
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -68,6 +69,7 @@ function Map() {
     libraries,
   });
 
+  const uploadScreenshot = async () => {};
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
