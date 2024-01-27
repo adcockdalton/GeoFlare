@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { Home, Map } from "lucide-react";
 
 const inter = Inter({
