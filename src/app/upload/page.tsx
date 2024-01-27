@@ -103,8 +103,8 @@ function UploadPage() {
                     <CardHeader>
                         <CardTitle>6996 Petr Avenue, Irvine CA</CardTitle>
                         <CardDescription className="flex items-center">
-                                <button className="warning-image-button"></button>
-                                <span className="ml-2">moderate risk</span>
+                            <button className="warning-image-button"></button>
+                            <span className="ml-2">moderate risk</span>
                         </CardDescription>
                     </CardHeader>
                     <CardFooter className="m-1">
@@ -124,6 +124,40 @@ function UploadPage() {
                     </CardFooter>
                 </Card>
             </div>
+
+            <div className="container flex items-center justify-between">
+                <Card>
+                    <CardContent className="flex items-center h-24">
+                        <p> Risk rating</p>
+                    </CardContent>
+                    <CardHeader>
+                        <CardTitle>Moderate Risk</CardTitle>
+                    </CardHeader>
+                    <CardFooter className="m-1">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="font-bold custom-text-color">
+                                        weather
+                                    </TableHead>
+                                    <TableHead>distance from fire</TableHead>
+                                    <TableHead className="font-bold custom-text-color">
+                                        time
+                                    </TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <TableRow className="shadow rounded-lg">
+                                    <TableCell className="font-medium">harsh</TableCell>
+                                    <TableCell className="text-right">24km</TableCell>
+                                    <TableCell className="font-medium">4min</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </CardFooter>
+                </Card>
+            </div>
+
 
         </div>
     )
