@@ -21,13 +21,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
-import {
-  CircleF,
-  GoogleMap,
-  MarkerF,
-  useLoadScript,
-} from "@react-google-maps/api";
-import { Route } from "lucide-react";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -70,6 +65,7 @@ function Map() {
     libraries,
   });
 
+  const uploadScreenshot = async () => {};
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
