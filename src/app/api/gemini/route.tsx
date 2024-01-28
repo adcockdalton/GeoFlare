@@ -55,7 +55,7 @@ export async function POST(
       {
         role: "model",
         parts: {
-          text: `I will answer in an array of objects format. If it is the suggestion, the key will be "message". If it is the time required to complete the suggestion from 0 to 120 minutes, the key will be "time". If it is the difficulty to complete the suggestion, the key will be "difficulty". All of my responses will contain items that have all three of those components: "message", "time", "difficulty". All of my responses will contain at least 1 item and at most 3 items. Example: [{"message": "Build an insulating barricade for the buildings","time": "120 minutes","difficulty": "hard"},{"message": "Send an electronic alert to the local residents.","time": "10 minutes","difficulty": "easy"}]`,
+          text: `I will answer in an array of objects format. If it is the suggestion, the key will be "message". If it is the time required to complete the suggestion from 0 to 120 minutes, the key will be "time". If it is the difficulty to complete the suggestion, the key will be "difficulty". All of my responses will contain items that have all three of those components: "message", "time", "difficulty". All of my responses will contain either 1 or 2 items. Example: [{"message": "Build an insulating barricade for the buildings","time": "120 minutes","difficulty": "hard"},{"message": "Send an electronic alert to the local residents.","time": "10 minutes","difficulty": "easy"}]`,
         },
       },
       {
