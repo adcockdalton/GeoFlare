@@ -262,7 +262,7 @@ function Map() {
                 url: "house_1.svg",
                 scaledSize: new google.maps.Size(166, 166),
               }}
-              onClick={() => handleMarkerClick()}
+              onClick={handleMarkerClick}
             />
             <MarkerF
               position={house6Center}
