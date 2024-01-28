@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 // import type { NextPage } from "next";
 // import styles from "../styles/Home.module.css";
 import Badge from "@/components/badge";
+import ChatBot from "@/components/chat/chatbot";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import {
   Table,
   TableBody,
@@ -29,32 +29,7 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-<<<<<<< HEAD
 import { Route } from "lucide-react";
-import ChatBot from "@/components/chat/chatbot";
-=======
-import axios from "axios";
-import FormData from "form-data";
-import { Clock, Route, SendHorizontal } from "lucide-react";
-
-const uploadFile = async (file: File) => {
-  const data = new FormData();
-  data.append("file", file.arrayBuffer(), {
-    filename: "inf.jpg",
-    contentType: file.type,
-  });
-  console.log(data);
-
-  const resp = await axios.post("/api/inference", data, {
-    headers: {
-      accept: "application/json",
-      "Accept-Language": "en-US,en;q=0.8",
-      "Content-Type": `multipart/form-data`,
-    },
-  });
-  console.log(resp.data);
-};
->>>>>>> 2ab8851b (axios)
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -212,7 +187,7 @@ function Map() {
       </div>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
-        onClick={() => uploadFile()}
+        // onClick={() => uploadFile()}
       >
         <Route></Route>Generate Optimal Route
       </Button>
