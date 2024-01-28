@@ -21,7 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, CircleF, useLoadScript } from "@react-google-maps/api";
 import { Clock, Route, SendHorizontal } from "lucide-react";
 
 function Map() {
@@ -68,11 +68,11 @@ function Map() {
     [],
   );
 
-  const mapCenter = useMemo(
-    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
+  // const mapCenter = useMemo(
+  //   () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
 
-    [],
-  );
+  //   [],
+  // );
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
