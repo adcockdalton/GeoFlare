@@ -1,6 +1,13 @@
 "use client";
 
-import React, { use, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  use,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import Badge from "@/components/badge";
 import Chat from "@/components/chat/chat";
@@ -51,6 +58,8 @@ function Map() {
   const [base64Image, setBase64Image] = useState("");
   const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
+  const [boxes, setBoxes] = useState([]);
+  const ref = useRef<any>();
   const imageUrl =
     "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM";
 
@@ -64,8 +73,7 @@ function Map() {
   }, []);
 
   const mapCenter = useMemo(
-    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
-
+    () => ({ lat: 33.52287157408444, lng: -117.66006159077706 }),
     [],
   );
 
@@ -113,13 +121,14 @@ function Map() {
   // );
   async function getCV() {
     const resp = await axios.get(
-      `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=18`,
+      `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=20`,
     );
     console.log(resp.data);
     setImage("data:image/png;base64," + resp.data.image);
+    setBoxes(resp.data.boxes);
   }
 
-  const [showGroundView, setShowGroundView] = useState(true);
+  const [showGroundView, setShowGroundView] = useState(false);
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
@@ -232,13 +241,13 @@ function Map() {
               onLoad={() => console.log("Circle Load...")}
               options={{
                 fillColor: pulsateAnimation.radius
-                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
                 fillOpacity:
                   0.2 +
                   pulsateAnimation.radius.to((radius) => radius / 800).get(),
                 strokeColor: pulsateAnimation.radius
-                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
                 strokeOpacity: 0.8,
               }}
@@ -312,15 +321,38 @@ function Map() {
           </CardFooter>
         </Card>
       </div>
-      {image && (
-        <Image
-          src={image}
-          width="1920"
-          height="1080"
-          className="z-50 shadow-2xl  outline-geo-teal  rounded-lg aspect-square w-[30rem] h-[30rem] absolute right-8 bottom-52"
-          alt="Map"
-        />
-      )}
+      <div className="absolute bottom-56 right-8">
+        {image && (
+          <div className="w-[30rem] h-[30rem] relative outline-2 outline rounded-xl rounded-t-lg">
+            <CardTitle className="absolute -top-9 py-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-xl">
+              fauna detection
+            </CardTitle>
+            <img
+              src={image}
+              width="1920"
+              height="1080"
+              className="z-50 shadow-2xl  outline-geo-teal   aspect-square w-full h-full  right-8 bottom-52  ring-black filter  rounded-tl-none  "
+              alt="Map"
+              ref={ref}
+            />
+            {boxes?.map((box) => (
+              <div
+                className="hover:opacity-50 transition-opacity duration-300 ease-in-out cursor-pointer filter brightness-200"
+                style={{
+                  zIndex: 100,
+                  position: "absolute",
+                  top: (box[1] / 1080) * ref?.current?.height,
+                  left: (box[0] / 1080) * ref?.current?.width,
+                  width: (box[2] / 1080) * ref?.current?.width,
+                  height: (box[3] / 1080) * ref?.current?.height,
+                  border: "4px solid dodgerblue",
+                  backgroundColor: "rgba(255,255,255,0.4)",
+                }}
+              ></div>
+            ))}
+          </div>
+        )}
+      </div>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
         // onClick={() => uploadFile()}
