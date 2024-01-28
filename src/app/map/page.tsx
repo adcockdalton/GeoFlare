@@ -21,10 +21,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
-<<<<<<< HEAD
-import { GoogleMap, MarkerF, CircleF, useLoadScript } from "@react-google-maps/api";
-import { Clock, Route, SendHorizontal } from "lucide-react";
-=======
 import {
   CircleF,
   GoogleMap,
@@ -32,7 +28,6 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import { Route } from "lucide-react";
->>>>>>> 4b2a4b51 (style: seperate cards)
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -70,7 +65,10 @@ function Map() {
 
   const house7Center = useMemo(() => ({ lat: 33.747891, lng: -117.75333 }), []);
 
-  const house8Center = useMemo(() => ({ lat: 33.737464774134956, lng: -117.74992465648853}), []);
+  const house8Center = useMemo(
+    () => ({ lat: 33.737464774134956, lng: -117.74992465648853 }),
+    [],
+  );
 
   const schoolCenter = useMemo(
     () => ({ lat: 33.73397237402972, lng: -117.75041997787818 }),
