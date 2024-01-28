@@ -62,9 +62,8 @@ function Map() {
   }, []); // Empty dependency array ensures this runs once on mount
 
   const mapCenter = useMemo(
-    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
-
-    [],
+    () => ({ lat: 33.745604, lng: -117.742148 }),
+     []
   );
 
   const house2Center = useMemo(
@@ -123,10 +122,10 @@ function Map() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
   });
   const pulsateAnimation = useSpring({
-    from: { radius: 250 },
-    to: { radius: 300 },
+    from: { radius: 300 },
+    to: { radius: 1000 },
     config: {
-      duration: 1000,
+      duration: 2000,
       easing: easings.easeInOutCirc,
     },
     onChange(result) {
@@ -152,7 +151,7 @@ function Map() {
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
-            zoom={18}
+            zoom={15}
             center={mapCenter}
             mapTypeId={google.maps.MapTypeId.SATELLITE}
             mapContainerStyle={{
@@ -168,8 +167,8 @@ function Map() {
               position={mapCenter}
               onLoad={() => console.log("Marker Loaded")}
               icon={{
-                url: "firesymbol_blue.svg",
-                scaledSize: new google.maps.Size(66, 66),
+                url: "blue_marker.svg",
+                scaledSize: new google.maps.Size(33, 33),
               }}
             />
             <MarkerF
@@ -231,14 +230,17 @@ function Map() {
                   .to((radius) => (radius > 2500 ? "green" : "red"))
                   .get(),
                 fillOpacity:
-                  0.2 +
-                  pulsateAnimation.radius.to((radius) => radius / 800).get(),
+                  0.6,
                 strokeColor: pulsateAnimation.radius
                   .to((radius) => (radius > 2500 ? "green" : "red"))
                   .get(),
-                strokeOpacity: 0.8,
+                strokeOpacity: 0.6
               }}
             />
+
+            //fillOpacity:
+                  0.2 +
+                  pulsateAnimation.radius.to((radius) => radius / 1000).get()
           </GoogleMap>
         </div>
         <Chat />
