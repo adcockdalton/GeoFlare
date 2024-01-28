@@ -7,6 +7,7 @@ import { Message } from "ai";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { child, getDatabase, push, ref, set, update } from "firebase/database";
+import { motion } from "framer-motion";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -84,46 +85,49 @@ const ChatBot: React.FC<ChatBotProps> = ({ m }) => {
   }
 
   return (
-    <>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-2 items-center">
-          <Avatar className="bg-geo-teal w-6 h-6 rounded-full">
-            <AvatarImage src="botLogo.svg" />
-          </Avatar>
-          <span className="text-lg text-white font-light">strategist</span>
-        </div>
-        <div className="w-full flex flex-col text-white bg-geo-grey p-4 rounded-xl text-lg gap-6">
-          <h1 className="text-xl font-semibold">
-            Immediate Strategies to Deploy
-          </h1>
-          <div className="flex flex-col gap-4">
-            <Suggestions suggestions={formattedSuggestions} />
-          </div>
-          <Button
-            className="bg-geo-teal text-white text-lg py-6"
-            onClick={(e) =>
-              formattedSuggestions.forEach((suggestion: SuggestionProps) => {
-                acceptMission(
-                  e,
-                  suggestion.suggestion
-                    .split("")
-                    .reduce(
-                      (hash, char) => (hash << 5) - hash + char.charCodeAt(0),
-                      0,
-                    )
-                    .toString(),
-                  suggestion.suggestion,
-                  suggestion.launch_time,
-                  suggestion.difficulty,
-                );
-              })
-            }
-          >
-            Hand off to Chief
-          </Button>
-        </div>
+    <motion.div
+      className="flex flex-col gap-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 100, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
+      <div className="flex gap-2 items-center">
+        <Avatar className="bg-geo-teal w-6 h-6 rounded-full">
+          <AvatarImage src="botLogo.svg" />
+        </Avatar>
+        <span className="text-lg text-white font-light">strategist</span>
       </div>
-    </>
+      <div className="w-full flex flex-col text-white bg-geo-grey p-4 rounded-xl text-lg gap-6">
+        <h1 className="text-xl font-semibold">
+          Immediate Strategies to Deploy
+        </h1>
+        <div className="flex flex-col gap-4">
+          <Suggestions suggestions={formattedSuggestions} />
+        </div>
+        <Button
+          className="bg-geo-teal text-white text-lg py-6"
+          onClick={(e) =>
+            formattedSuggestions.forEach((suggestion: SuggestionProps) => {
+              acceptMission(
+                e,
+                suggestion.suggestion
+                  .split("")
+                  .reduce(
+                    (hash, char) => (hash << 5) - hash + char.charCodeAt(0),
+                    0,
+                  )
+                  .toString(),
+                suggestion.suggestion,
+                suggestion.launch_time,
+                suggestion.difficulty,
+              );
+            })
+          }
+        >
+          Hand off to Chief
+        </Button>
+      </div>
+    </motion.div>
   );
 };
 

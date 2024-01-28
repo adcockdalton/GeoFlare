@@ -45,6 +45,7 @@ import {
   set,
   update,
 } from "firebase/database";
+import { motion } from "framer-motion";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
 
@@ -105,7 +106,7 @@ function Map() {
   }, []);
 
   const mapCenter = useMemo(
-    () => ({ lat: 33.52287157408444, lng: -117.66006159077706 }),
+    () => ({ lat: 33.74503670122371, lng: -117.74688633807939 }),
     [],
   );
 
@@ -244,7 +245,7 @@ function Map() {
               position={mapCenter}
               onLoad={() => console.log("Marker Loaded")}
               icon={{
-                url: "blue_marker.svg",
+                url: "firesymbol_blue.svg",
                 scaledSize: new google.maps.Size(33, 33),
               }}
             />
@@ -277,7 +278,7 @@ function Map() {
               onLoad={() => console.log("Marker Loaded")}
               icon={{
                 url: "house_1.svg",
-                scaledSize: new google.maps.Size(166, 166),
+                scaledSize: new google.maps.Size(66, 66),
               }}
               onClick={handleMarkerClick}
             />
@@ -394,11 +395,16 @@ function Map() {
         </Card>
       </div>
       <div className="absolute bottom-56 right-8">
+        <CardTitle className="absolute -top-9 py-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-xl">
+          fauna detection
+        </CardTitle>
         {image && (
-          <div className="w-[30rem] h-[30rem] relative outline-2 outline rounded-xl rounded-t-lg">
-            <CardTitle className="absolute -top-9 py-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-xl">
-              fauna detection
-            </CardTitle>
+          <motion.div
+            className="w-[30rem] h-[30rem] relative outline-2 outline rounded-xl rounded-t-lg overflow-clip"
+            animate={{ y: 0, opacity: 100 }}
+            initial={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
             <img
               src={image}
               width="1920"
@@ -413,16 +419,16 @@ function Map() {
                 style={{
                   zIndex: 100,
                   position: "absolute",
-                  top: (box[1] / 1080) * ref?.current?.height,
-                  left: (box[0] / 1080) * ref?.current?.width,
-                  width: (box[2] / 1080) * ref?.current?.width,
-                  height: (box[3] / 1080) * ref?.current?.height,
+                  top: (box[1] / 640) * ref?.current?.height,
+                  left: (box[0] / 640) * ref?.current?.width,
+                  width: (box[2] / 640) * ref?.current?.width,
+                  height: (box[3] / 640) * ref?.current?.height,
                   border: "4px solid dodgerblue",
                   backgroundColor: "rgba(255,255,255,0.4)",
                 }}
               ></div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
       <Button

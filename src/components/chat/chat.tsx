@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatBot from "@/components/chat/chatbot";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useChat } from "ai/react";
+import { motion } from "framer-motion";
 import { ArrowUp, Loader2, MoveDiagonal, Plus, Sparkles } from "lucide-react";
 
 export default function Chat() {
@@ -32,7 +33,12 @@ export default function Chat() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col bg-geo-black border-none w-[25rem] py-4 rounded-s-xl rounded-e-xl z-20">
+    <motion.div
+      className="flex flex-col bg-geo-black border-none w-[25rem] py-4 rounded-xl rounded-tl-none z-20 relative"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 100, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
       <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
         Live Chat
       </CardTitle>
@@ -102,6 +108,6 @@ export default function Chat() {
           </Button>
         </form>
       </CardContent>
-    </div>
+    </motion.div>
   );
 }
