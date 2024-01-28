@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { use, useCallback, useEffect, useMemo, useState } from "react";
 import Badge from "@/components/badge";
 import ChatBot from "@/components/chat/chatbot";
 import { Button } from "@/components/ui/button";
@@ -26,10 +26,8 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-// import { Loader } from "@googlemaps/js-api-loader";
-// import fetch from "isomorphic-unfetch";-----
 import { Route } from "lucide-react";
-import { animated, useSpring } from "react-spring";
+import { animated, easings, useSpring } from "react-spring";
 
 const AnimatedCircle = animated(CircleF);
 
@@ -50,8 +48,9 @@ async function convertImageToBase64(url: string): Promise<string> {
 
 function Map() {
   const [base64Image, setBase64Image] = useState("");
+  const [rad, setRad] = useState(10);
   const imageUrl =
-    "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=YOUR_API_KEY";
+    "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM";
 
   useEffect(() => {
     convertImageToBase64(imageUrl)
@@ -124,20 +123,23 @@ function Map() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
   });
   const pulsateAnimation = useSpring({
-    from: { scale: 20 }, // initial radius
-    to: { scale: 30 }, // final radius
-    config: { duration: 1000 }, // animation duration
-    reset: true, // reset animation after it finishes
-    reverse: true, // run the animation in reverse as well
-    loop: true, // loop animation indefinitely
-    onChange(result, ctrl, item) {
-      // console.log("onChange", result.value);
+    from: { radius: 250 },
+    to: { radius: 300 },
+    config: {
+      duration: 1000,
+      easing: easings.easeInOutCirc,
     },
+    onChange(result) {
+      setRad(result.value.radius);
+    },
+    loop: true,
+
+    // reverse: true,
   });
 
   const getImage = () => {
     console.log("image received");
-    // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=YOUR KEY">
+    // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
   };
   const uploadScreenshot = async () => {};
   if (!isLoaded) {
@@ -150,7 +152,7 @@ function Map() {
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
-            zoom={30}
+            zoom={18}
             center={mapCenter}
             mapTypeId={google.maps.MapTypeId.SATELLITE}
             mapContainerStyle={{
@@ -222,22 +224,20 @@ function Map() {
 
             <AnimatedCircle
               center={mapCenter}
-              radius={20}
+              radius={rad}
               onLoad={() => console.log("Circle Load...")}
-              style={{
-                transform: pulsateAnimation.scale.to(
-                  (scale) => `scale(${scale})`,
-                ),
+              options={{
+                fillColor: pulsateAnimation.radius
+                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .get(),
+                fillOpacity:
+                  0.2 +
+                  pulsateAnimation.radius.to((radius) => radius / 800).get(),
+                strokeColor: pulsateAnimation.radius
+                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .get(),
+                strokeOpacity: 0.8,
               }}
-              // options={{
-              //   fillColor: pulsateAnimation.radius.to((radius) =>
-              //     radius > 2500 ? "green" : "red",
-              //   ),
-              //   strokeColor: pulsateAnimation.radius.to((radius) =>
-              //     radius > 2500 ? "green" : "red",
-              //   ),
-              //   strokeOpacity: 0.8,
-              // }}
             />
           </GoogleMap>
         </div>
