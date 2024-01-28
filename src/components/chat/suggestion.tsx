@@ -8,7 +8,7 @@ export interface SuggestionProps {
   difficulty: string;
 }
 
-interface SuggestionsProps {
+export interface SuggestionsProps {
   suggestions: SuggestionProps[];
 }
 

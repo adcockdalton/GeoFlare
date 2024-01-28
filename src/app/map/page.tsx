@@ -35,8 +35,39 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import {
+  child,
+  get,
+  getDatabase,
+  push,
+  ref,
+  set,
+  update,
+} from "firebase/database";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "geoflare.firebaseapp.com",
+  databaseURL: "https://geoflare-default-rtdb.firebaseio.com",
+  projectId: "geoflare",
+  storageBucket: "geoflare.appspot.com",
+  messagingSenderId: "149802851296",
+  appId: "1:149802851296:web:c86016fe23157afa5b6985",
+  measurementId: "G-HKFQSQM52X",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 const AnimatedCircle = animated(CircleF);
 
@@ -168,6 +199,7 @@ function Map() {
     // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
   };
   const uploadScreenshot = async () => {};
+
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
