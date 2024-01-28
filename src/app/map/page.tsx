@@ -21,21 +21,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
-import {
-  CircleF,
-  GoogleMap,
-  MarkerF,
-  useLoadScript,
-} from "@react-google-maps/api";
-import { Route } from "lucide-react";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { Clock, Route, SendHorizontal } from "lucide-react";
+import { useMutation } from "react-query";
 
 function Map() {
-  const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
-    "places",
-  ];
-  const mapCenter = useMemo(() => ({ lat: 33.745604, lng: -117.742148 }), []);
-  const house1Center = useMemo(
-    () => ({ lat: 33.73753232504521, lng: -117.75110662338541 }),
+  const mapCenter = useMemo(
+    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
+
     [],
   );
 
@@ -122,37 +115,58 @@ function Map() {
             <MarkerF
               position={mapCenter}
               onLoad={() => console.log("Marker Loaded")}
-              icon="fireSvg.svg"
+              icon={{
+                url: "firesymbol_blue.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={schoolCenter}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={house3Center}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={house4Center}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={house5Center}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={house6Center}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
             />
             <MarkerF
               position={house7Center}
               onLoad={() => console.log("Marker Loaded")}
-              icon="diamondsGeoFlare.svg"
+              icon={{
+                url: "house_1.svg",
+                scaledSize: new google.maps.Size(66, 66),
+              }}
               title="Hello World!"
             />
             {[1250, 2500].map((radius, idx) => {

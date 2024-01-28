@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Map } from "lucide-react";
+import SidebarButton from "@/components/sidebar-button";
 
 interface Props {
   children: React.ReactNode;
@@ -13,33 +11,22 @@ function Wrapper(props: Props) {
   const path = usePathname();
   return path != "/" ? (
     <main className="flex w-full relative overflow-y-auto  h-screen">
-      <div className=" flex w-min bg-geo-black flex-col py-32 px-2 gap-4 items-center">
-        <Link href={"/home"}>
-          <Image
-            width={30}
-            height={30}
-            className="relative bottom-20"
-            src="/logo2.svg"
-            alt="home"
-          ></Image>
-        </Link>
-        <Link href={"/home"}>
-          <Image
-            width={40}
-            height={40}
-            className="bg-geo-grey rounded-lg p-2 aspect-square "
-            src="/houseicon.svg"
-            alt="home"
-          ></Image>
-        </Link>
-        <Link href={"/map"}>
-          <Map
-            size={40}
-            fill="white"
-            stroke="none"
-            className=" rounded-lg p-2"
-          ></Map>
-        </Link>
+      <div className=" flex w-16 bg-geo-black flex-col py-32 px-2 gap-4 items-center">
+        <SidebarButton
+          selected={path == "/"}
+          src="/logo2.svg"
+          url=""
+        ></SidebarButton>
+        <SidebarButton
+          selected={path == "/home"}
+          src="/houseicon.svg"
+          url="home"
+        ></SidebarButton>
+        <SidebarButton
+          selected={path == "/map"}
+          src="/map2.svg"
+          url="map"
+        ></SidebarButton>
       </div>
       <div className="flex flex-1 flex-col bg-geo-black pr-4 pb-4   relative">
         <div className="flex justify-between my-3">
