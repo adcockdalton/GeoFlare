@@ -74,7 +74,7 @@ function Home() {
                 </div>
               </div>
               <Link href="/map">
-              <Button className="bg-geo-light  text-lg p-7">Launch
+              <Button className="  text-lg p-7" style={{backgroundColor:'#2A3139', }}>Launch
               <ArrowUpRightIcon /></Button>
               </Link>
             </Card>

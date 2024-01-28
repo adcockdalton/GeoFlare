@@ -51,6 +51,8 @@ body
   overflow-x: hidden 
   background-color: $dark-bg
   font-family: 'Alliance No.1', sans-serif
+  cursor: url(../../public/cursor.svg), auto
+
 
 //* light and dark mode
 @mixin color-themes($theme)  
@@ -259,7 +261,7 @@ nav
     width: 100%
     
   &:hover
-      cursor: pointer
+      cursor: url(../../public/cursorHover.svg), auto
       transform: scale(1.05)
       border: 2px solid $prim
       opacity: 1
@@ -296,8 +298,11 @@ Button
      background-color: $prim 
      font-size: $buttons
   
-     cursor: pointer 
+     cursor: url(../../public/cursorHover.svg), auto 
      @include flex-row
+     
+     cursor: url(../../public/cursor.svg), auto
+
     
      padding: 30px 22px 
      white-space: nowrap 
@@ -311,11 +316,12 @@ Button
      transition: $hoverAnimate
      &:hover  
             background-color: $hover-prim 
+            cursor: url(../../public/cursorHover.svg), auto
     &.secondary  
      background-color: $sec 
      font-size: $buttons
      @include grid 
-     cursor: pointer 
+     cursor: url(../../public/cursorHover.svg), auto 
 
      padding: 30px 22px 
      white-space: nowrap 

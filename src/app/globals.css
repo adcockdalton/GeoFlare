@@ -74,13 +74,18 @@
     @apply bg-background text-foreground;
   }
 }
-
+html, body {
+  cursor: url(../../public/cursor.svg), auto
+}
+Button:hover, a:hover {
+  cursor: url(../../public/cursorHover.svg), auto;
+}
 .warning-image-button {
   display: inline-block;
   padding: 1px; /* Add padding to the button */
   border: none;
   background: none;
-  cursor: pointer;
+  cursor: url(../../public/cursorHover.svg), auto;
 }
 
 .warning-image-button::before {
@@ -97,7 +102,7 @@
   padding: 10px;
   border: none;
   background: none;
-  cursor: pointer;
+  cursor: url(../../public/cursorHover.svg), auto;
 }
 
 .house-image-button::before {
