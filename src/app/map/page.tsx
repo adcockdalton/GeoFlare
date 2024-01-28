@@ -28,6 +28,7 @@ function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
     "places",
   ];
+  const mapCenter = useMemo(() => ({ lat: 33.745604, lng: -117.742148 }), []);
   const house1Center = useMemo(
     () => ({ lat: 33.73753232504521, lng: -117.75110662338541 }),
     [],
@@ -37,6 +38,29 @@ function Map() {
     () => ({ lat: 33.73921856606024, lng: -117.7532953058211 }),
     [],
   );
+
+  const house3Center = useMemo(
+    () => ({ lat: 33.740958, lng: -117.743388 }),
+    [],
+  );
+
+  const house4Center = useMemo(
+    () => ({ lat: 33.74174935389506, lng: -117.7380577830899 }),
+    [],
+  );
+
+  const house5Center = useMemo(
+    () => ({ lat: 33.74015345684956, lng: -117.73795506714471 }),
+    [],
+  );
+  const house6Center = useMemo(
+    () => ({ lat: 33.752066, lng: -117.747864 }),
+    [],
+  );
+
+  const house7Center = useMemo(() => ({ lat: 33.747891, lng: -117.75333 }), []);
+
+  const house8Center = useMemo(() => ({ lat: 33.737464774134956, lng: -117.74992465648853}), []);
 
   const schoolCenter = useMemo(
     () => ({ lat: 33.73397237402972, lng: -117.75041997787818 }),
@@ -90,23 +114,51 @@ function Map() {
           <MarkerF
             position={mapCenter}
             onLoad={() => console.log("Marker Loaded")}
+            icon="fireSvg.svg"
+            
           />
-
           <MarkerF
-            position={house1Center}
+            position={house8Center}
             onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
           />
-
-          <MarkerF
+          {/* <MarkerF
             position={house2Center}
             onLoad={() => console.log("Marker Loaded")}
-          />
-
+          /> */}
           <MarkerF
             position={schoolCenter}
             onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
           />
-          {[1000, 2200].map((radius, idx) => {
+          <MarkerF
+            position={house3Center}
+            onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
+          />
+          <MarkerF
+            position={house4Center}
+            onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
+          />
+          <MarkerF
+            position={house5Center}
+            onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
+          />
+          <MarkerF
+            position={house6Center}
+            onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
+          />
+          <MarkerF
+            position={house7Center}
+            onLoad={() => console.log("Marker Loaded")}
+            icon="diamondsGeoFlare.svg"
+            title="Hello World!"
+          />
+          
+          {[1250, 2500].map((radius, idx) => {
             return (
               <CircleF
                 key={idx}
@@ -114,8 +166,8 @@ function Map() {
                 radius={radius}
                 onLoad={() => console.log("Circle Load...")}
                 options={{
-                  fillColor: radius > 1000 ? "green" : "red",
-                  strokeColor: radius > 1000 ? "green" : "red",
+                  fillColor: radius > 2500 ? "green" : "red",
+                  strokeColor: radius > 2500 ? "green" : "red",
                   strokeOpacity: 0.8,
                 }}
               />
