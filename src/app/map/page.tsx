@@ -21,8 +21,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // import { Loader } from "@googlemaps/js-api-loader";
+<<<<<<< HEAD
 import { GoogleMap, MarkerF, CircleF, useLoadScript } from "@react-google-maps/api";
 import { Clock, Route, SendHorizontal } from "lucide-react";
+=======
+import {
+  CircleF,
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+} from "@react-google-maps/api";
+import { Route } from "lucide-react";
+>>>>>>> 4b2a4b51 (style: seperate cards)
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -94,89 +104,64 @@ function Map() {
     return <p>Loading...</p>;
   }
   return (
-    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full gap-4 w-full relative overflow-none">
-      <ChatBot />
-      <div className="rounded-xl ">
-        <GoogleMap
-          options={mapOptions}
-          zoom={15}
-          center={mapCenter}
-          mapTypeId={google.maps.MapTypeId.SATELLITE}
-          mapContainerStyle={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-          onLoad={() => console.log("Map Component Loaded...")}
-        >
-          <MarkerF
-            position={mapCenter}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="fireSvg.svg"
-            
-          />
-          <MarkerF
-            position={house8Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          {/* <MarkerF
-            position={house2Center}
-            onLoad={() => console.log("Marker Loaded")}
-          /> */}
-          <MarkerF
-            position={schoolCenter}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          <MarkerF
-            position={house3Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          <MarkerF
-            position={house4Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          <MarkerF
-            position={house5Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          <MarkerF
-            position={house6Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-          />
-          <MarkerF
-            position={house7Center}
-            onLoad={() => console.log("Marker Loaded")}
-            icon="diamondsGeoFlare.svg"
-            title="Hello World!"
-          />
-          
-          {[1250, 2500].map((radius, idx) => {
-            return (
-              <CircleF
-                key={idx}
-                center={mapCenter}
-                radius={radius}
-                onLoad={() => console.log("Circle Load...")}
-                options={{
-                  fillColor: radius > 2500 ? "green" : "red",
-                  strokeColor: radius > 2500 ? "green" : "red",
-                  strokeOpacity: 0.8,
-                }}
-              />
-            );
-          })}
-        </GoogleMap>
-      </div>
-      <div className="relative flex h-min">
-        <Card className="bg-geo-black border-none">
+    <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full justify-between w-full relative overflow-none">
+      <div className="flex gap-4">
+        <div className="rounded-xl ">
+          <GoogleMap
+            options={mapOptions}
+            zoom={15}
+            center={mapCenter}
+            mapTypeId={google.maps.MapTypeId.SATELLITE}
+            mapContainerStyle={{
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+            onLoad={() => console.log("Map Component Loaded...")}
+          >
+            <MarkerF
+              position={mapCenter}
+              onLoad={() => console.log("Marker Loaded")}
+            />
+
+            <MarkerF
+              position={house1Center}
+              onLoad={() => console.log("Marker Loaded")}
+            />
+
+            <MarkerF
+              position={house2Center}
+              onLoad={() => console.log("Marker Loaded")}
+            />
+
+            <MarkerF
+              position={schoolCenter}
+              onLoad={() => console.log("Marker Loaded")}
+            />
+            {[1000, 2200].map((radius, idx) => {
+              return (
+                <CircleF
+                  key={idx}
+                  center={mapCenter}
+                  radius={radius}
+                  onLoad={() => console.log("Circle Load...")}
+                  options={{
+                    fillColor: radius > 1000 ? "green" : "red",
+                    strokeColor: radius > 1000 ? "green" : "red",
+                    strokeOpacity: 0.8,
+                  }}
+                />
+              );
+            })}
+          </GoogleMap>
+        </div>
+        <ChatBot />
+        <Card className="bg-geo-black border-none rounded-tl-none relative flex flex-col h-min">
+          <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
+            ground view
+          </CardTitle>
           <CardContent className="flex items-center h-48">
             <button className="flex house-image-button"></button>
           </CardContent>
@@ -189,14 +174,14 @@ function Map() {
               <span className="ml-2 text-yellow">moderate risk</span>
             </CardDescription>
           </CardHeader>
-          <CardFooter className=" flex m-1">
+          <CardFooter className=" flex">
             <Table className="flex text-white">
-              <TableBody>
-                <TableRow className="shadow rounded-lg">
+              <TableBody className="w-full">
+                <TableRow className="shadow   flex justify-between">
                   <TableCell className="font-medium">size</TableCell>
                   <TableCell className="text-right">240sqft</TableCell>
                 </TableRow>
-                <TableRow className="shadow rounded-lg">
+                <TableRow className="shadow rounded-lg flex justify-between">
                   <TableCell className="font-medium">type</TableCell>
                   <TableCell className="text-right">Townhouse</TableCell>
                 </TableRow>
@@ -205,7 +190,7 @@ function Map() {
           </CardFooter>
         </Card>
       </div>
-      <div className="relative flex h-min">
+      <div className="relative flex h-min ">
         <Card className="bg-geo-black border-none">
           <CardHeader>
             <Badge text="Risk rating"></Badge>
