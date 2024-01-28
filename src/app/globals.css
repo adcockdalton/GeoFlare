@@ -123,3 +123,7 @@
 div[data-orientation="vertical"] {
  display: none;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}
