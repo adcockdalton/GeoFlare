@@ -136,6 +136,12 @@ function Map() {
     // reverse: true,
   });
 
+  // showGroundView
+  const handleMarkerClick = () => {
+    console.log("Card clicked")
+    setShowGroundView((showGroundView) => !showGroundView)
+  }
+
   const getImage = () => {
     console.log("image received");
     // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
@@ -200,8 +206,9 @@ function Map() {
               onLoad={() => console.log("Marker Loaded")}
               icon={{
                 url: "house_1.svg",
-                scaledSize: new google.maps.Size(66, 66),
+                scaledSize: new google.maps.Size(166, 166),
               }}
+              onClick={() => handleMarkerClick()}
             />
             <MarkerF
               position={house6Center}
