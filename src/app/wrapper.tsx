@@ -12,15 +12,6 @@ function Wrapper(props: Props) {
   return path != "/" ? (
     <main className="flex w-full relative overflow-y-auto  h-screen">
       <div className=" flex w-16 bg-geo-black flex-col py-32 px-2 gap-4 items-center">
-        {/* <Link href={"/home"}>
-          <Image
-            width={30}
-            height={30}
-            className="relative bottom-20"
-            src="/logo2.svg"
-            alt="home"
-          ></Image>
-        </Link> */}
         <SidebarButton
           selected={path == "/"}
           src="/logo2.svg"
