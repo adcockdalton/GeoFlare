@@ -122,23 +122,40 @@ function Map() {
             <MarkerF
               position={mapCenter}
               onLoad={() => console.log("Marker Loaded")}
+              icon="fireSvg.svg"
             />
-
-            <MarkerF
-              position={house1Center}
-              onLoad={() => console.log("Marker Loaded")}
-            />
-
-            <MarkerF
-              position={house2Center}
-              onLoad={() => console.log("Marker Loaded")}
-            />
-
             <MarkerF
               position={schoolCenter}
               onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
             />
-            {[1000, 2200].map((radius, idx) => {
+            <MarkerF
+              position={house3Center}
+              onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
+            />
+            <MarkerF
+              position={house4Center}
+              onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
+            />
+            <MarkerF
+              position={house5Center}
+              onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
+            />
+            <MarkerF
+              position={house6Center}
+              onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
+            />
+            <MarkerF
+              position={house7Center}
+              onLoad={() => console.log("Marker Loaded")}
+              icon="diamondsGeoFlare.svg"
+              title="Hello World!"
+            />
+            {[1250, 2500].map((radius, idx) => {
               return (
                 <CircleF
                   key={idx}
@@ -146,8 +163,8 @@ function Map() {
                   radius={radius}
                   onLoad={() => console.log("Circle Load...")}
                   options={{
-                    fillColor: radius > 1000 ? "green" : "red",
-                    strokeColor: radius > 1000 ? "green" : "red",
+                    fillColor: radius > 2500 ? "green" : "red",
+                    strokeColor: radius > 2500 ? "green" : "red",
                     strokeOpacity: 0.8,
                   }}
                 />

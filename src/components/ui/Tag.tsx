@@ -1,12 +1,5 @@
-
-function Tag({tagName}:{tagName:string}) {
-  return (
-    <div className='tag'>
-      {tagName}
-    </div>
-  )
+function Tag({ tagName }: { tagName: string }) {
+  return <div className="tag">{tagName}</div>;
 }
 
-
-
-export default Tag
+export default Tag;
