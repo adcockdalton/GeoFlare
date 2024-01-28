@@ -15,28 +15,30 @@ function Strategies() {
     {
       title: "Action 1",
       action: "Do something",
-      image_url: "placeholder-image.jpg",
+      image_url:
+        "https://cdn.discordapp.com/attachments/1201073140189646898/1201073174251577444/map.png",
     },
     {
       title: "Action 2",
       action: "Do something else",
-      image_url: "placeholder-image.jpg",
+      image_url:
+        "https://cdn.discordapp.com/attachments/1201073140189646898/1201073174251577444/map.png",
     },
   ];
 
   return (
-    <div className="h-full text-geo-white bg-geo-grey p-8">
-      <div className="text-4xl pb-8 pr-0 flex items-end">
+    <div className="h-full text-geo-white bg-geo-grey rounded-t-xl pb-0 p-8">
+      <div className="text-6xl pb-8 pr-0 flex items-end">
         <div className="flex-col flex">
-          <div>Immediate</div>
-          <div>Strategies</div>
+          <h1>Immediate</h1>
+          <h1>Strategies</h1>
         </div>
         <div>
-          <Rocket size={75} className="pl-0"></Rocket>
+          <Rocket size={110} className="pl-0"></Rocket>
         </div>
       </div>
       <div className="content">
-        <div className="space-y-4">
+        <div className="space-y-4 rounded-xl">
           {actions.map((action, index, image_url) => (
             <Action
               key={index}
@@ -74,7 +76,7 @@ export function Action({ title, action, image_url }: ActionProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <img src={image_url} alt="Image" />
+        <img src={image_url} alt="Image" className="p-8" />
       </CardContent>
     </Card>
   );

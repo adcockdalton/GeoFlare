@@ -4,11 +4,11 @@ import Strategies from "@/components/strategy-panel";
 
 function DashboardPage() {
   return (
-    <div className=" flex relative bg-geo-grey p-8 pb-0 rounded-t-xl flex-1">
-      <div className="bg-geo-white flex-1 rounded-t-xl">
+    <div className=" overflow-y-clip h-full flex relative bg-geo-black pl-32 p-8 pb-0 rounded-xl flex-1">
+      <div className=" bg-geo-white flex-1 pb-0 rounded-t-xl">
         <Properties />
       </div>
-      <div className="w-1/3">
+      <div className="w-[42%] pl-16 pb-0 rounded-t-xl">
         <Strategies />
       </div>
     </div>

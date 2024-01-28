@@ -1,19 +1,10 @@
 import React from "react";
-import { Avatar } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Clock } from "lucide-react";
 
-interface SuggestionProps {
+export interface SuggestionProps {
   suggestion: string;
-  launch_time: number;
+  launch_time: string;
   difficulty: string;
 }
 
@@ -24,9 +15,8 @@ export interface SuggestionsProps {
 function Suggestions({ suggestions }: SuggestionsProps) {
   return (
     <div className="flex flex-col gap-4">
-      {suggestions.map((suggestion, index) => (
+      {suggestions.map((suggestion) => (
         <Suggestion
-          key={index}
           suggestion={suggestion.suggestion}
           launch_time={suggestion.launch_time}
           difficulty={suggestion.difficulty}
@@ -45,7 +35,7 @@ function Suggestion({ suggestion, launch_time, difficulty }: SuggestionProps) {
           <h4 className="text-slate-400">launch time</h4>
           <div className="flex items-center gap-1 px-2 py-1 bg-geo-light rounded-lg text-white">
             <Clock></Clock>
-            <h4>{launch_time} minutes</h4>
+            <h4>{launch_time}</h4>
           </div>
         </div>
         <div className="flex justify-between text-sm font-medium items-center w-full">

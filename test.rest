@@ -1,0 +1,10 @@
+GET https://maps.googleapis.com/maps/api/staticmap?center=34.26298363160121,-116.88495070901917&zoom=18&scale=2&maptype=satellite&size=800x800&key=AIzaSyDEeRLQUVP2qJ1Q1_iiVYIziCdDUPzgqsc HTTP/1.1
+
+###
+
+GET http://localhost:8000/inference?center=34.26298363160121,-116.88495070901917 HTTP/1.1
+
+
+###
+
+GET http://localhost:8000/inference?center=big bear lake&zoom=20 HTTP/1.1
