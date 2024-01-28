@@ -1,6 +1,7 @@
 "use client";
 
 import React, { use, useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Badge from "@/components/badge";
 import Chat from "@/components/chat/chat";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
+import axios from "axios";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
 
@@ -45,9 +47,9 @@ async function convertImageToBase64(url: string): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
-
 function Map() {
   const [base64Image, setBase64Image] = useState("");
+  const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
   const imageUrl =
     "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM";
@@ -59,7 +61,7 @@ function Map() {
         console.log(base64);
       })
       .catch((error) => console.error(error));
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   const mapCenter = useMemo(
     () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
@@ -109,7 +111,16 @@ function Map() {
 
   //   [],
   // );
-  const [showGroundView, setShowGroundView] = useState(false);
+  async function getCV() {
+    const resp = await axios.get(
+      `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=18`,
+    );
+    console.log(resp.data);
+    setImage("data:image/png;base64," + resp.data.image);
+  }
+
+  const [showGroundView, setShowGroundView] = useState(true);
+
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
@@ -133,15 +144,7 @@ function Map() {
       setRad(result.value.radius);
     },
     loop: true,
-
-    // reverse: true,
   });
-
-  const getImage = () => {
-    console.log("image received");
-    // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
-  };
-  const uploadScreenshot = async () => {};
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
@@ -149,6 +152,7 @@ function Map() {
     <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full justify-between w-full relative overflow-none">
       <div className="flex gap-4">
         {/* <div>{base64Image && <img src={base64Image} alt="Map" />}</div> */}
+
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
@@ -308,6 +312,15 @@ function Map() {
           </CardFooter>
         </Card>
       </div>
+      {image && (
+        <Image
+          src={image}
+          width="1920"
+          height="1080"
+          className="z-50 shadow-2xl  outline-geo-teal  rounded-lg aspect-square w-[30rem] h-[30rem] absolute right-8 bottom-52"
+          alt="Map"
+        />
+      )}
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
         // onClick={() => uploadFile()}
@@ -316,7 +329,7 @@ function Map() {
       </Button>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-red-500 my-6 bottom-20 right-8"
-        onClick={() => getImage()}
+        onClick={() => getCV()}
       >
         Analyze Fire
       </Button>
