@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Badge from "@/components/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -67,7 +67,7 @@ function Home() {
                 </div>
               </div>
               <Link href="/map">
-              <Button className="bg-geo-light  text-lg">Launch</Button>
+                <Button className="bg-geo-light  text-lg">Launch</Button>
               </Link>
             </Card>
           </CardContent>
