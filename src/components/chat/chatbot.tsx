@@ -32,7 +32,7 @@ const sampleMessage2 = "Thank you for the suggestion!";
 
 function ChatBot() {
   return (
-    <div className="flex flex-col bg-geo-black border-none  w-[25rem] py-4  relative rounded-bl-xl rounded-e-xl z-20">
+    <div className="flex flex-col bg-geo-black border-none  w-[30rem] py-4  relative rounded-bl-xl rounded-e-xl z-20">
       <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
         Live Chat
       </CardTitle>
