@@ -68,6 +68,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const missionRef = ref(database, "mission");
 
 const AnimatedCircle = animated(CircleF);
 
@@ -190,15 +191,31 @@ function Map() {
 
   // showGroundView
   const handleMarkerClick = () => {
-    console.log("Card clicked")
-    setShowGroundView((showGroundView) => !showGroundView)
-  }
+    console.log("Card clicked");
+    setShowGroundView((showGroundView) => !showGroundView);
+  };
 
   const getImage = () => {
     console.log("image received");
     // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
   };
   const uploadScreenshot = async () => {};
+
+  const [missions, setMissions] = useState<any[]>([]);
+
+  useEffect(() => {
+    getMissions();
+  }, [missions]);
+
+  function getMissions() {
+    get(missionRef).then((snapshot) => {
+      const updatedMissions: any[] = [];
+      snapshot.forEach((childSnapshot) => {
+        updatedMissions.push(childSnapshot.val());
+      });
+      setMissions(updatedMissions);
+    });
+  }
 
   if (!isLoaded) {
     return <p>Loading...</p>;
@@ -290,18 +307,13 @@ function Map() {
                 fillColor: pulsateAnimation.radius
                   .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
-                fillOpacity:
-                  0.6,
+                fillOpacity: 0.6,
                 strokeColor: pulsateAnimation.radius
                   .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
-                strokeOpacity: 0.6
+                strokeOpacity: 0.6,
               }}
             />
-
-            //fillOpacity:
-                  0.2 +
-                  pulsateAnimation.radius.to((radius) => radius / 1000).get()
           </GoogleMap>
         </div>
         <Chat />
@@ -339,33 +351,43 @@ function Map() {
           </Card>
         )}
       </div>
-      <div className="relative flex h-min ">
-        <Card className="bg-geo-black border-none">
-          <CardHeader>
-            <Badge text="Risk rating"></Badge>
-            <CardTitle className="text-white">Moderate Risk</CardTitle>
+      <div className="relative flex h-min max-w-[40rem]  ">
+        <Card className="bg-geo-black border-none max-h-[30vh] overflow-y-auto">
+          <CardHeader className="py-4">
+            <CardTitle className="text-white">Missions List</CardTitle>
           </CardHeader>
           <CardFooter className="m-1">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className=" font-bold custom-text-color">
-                    weather
+                  <TableHead className="hover:text-geo-black text-geo-teal font-bold custom-text-color">
+                    Missions
                   </TableHead>
-                  <TableHead className="font-bold custom-text-color">
-                    distance from fire
+                  <TableHead className="hover:text-geo-black font-bold custom-text-color">
+                    Difficulty
                   </TableHead>
-                  <TableHead className="font-bold custom-text-color">
-                    time
+                  <TableHead className="hover:text-geo-black font-bold custom-text-color">
+                    Time
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow className="shadow rounded-lg text-white">
-                  <TableCell className="font-medium">harsh</TableCell>
-                  <TableCell className="font-medium">24km</TableCell>
-                  <TableCell className="font-medium">4min</TableCell>
-                </TableRow>
+                {missions.map((mission) => (
+                  <TableRow
+                    key={mission.suggestion}
+                    className="shadow rounded-lg text-white"
+                  >
+                    <TableCell className="font-medium">
+                      {mission.suggestion}
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {mission.difficulty}
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {mission.launch_time}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </CardFooter>
