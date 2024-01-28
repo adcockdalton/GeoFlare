@@ -78,7 +78,7 @@ export async function POST(
       {
         role: "model",
         parts: {
-          text: `I will answer in an array of objects format. I will recommend an action you should take related to the situation, the key will be "action". I will estimate the time this action should take in minutes with a maximum value of 120 that is divisible by 5, they key will be "time". I will estimate the difficulty of the action using a single word, the key will be "difficulty." Example: [{"action": "Deploy a search-and-rescue team in the wooded area.","time": "60","difficulty": "moderate"},{"action": "Construct a barrier between the fire border and the neighborhood area.","time": "120","difficulty": "difficult"}]`,
+          text: `I will answer in an array of objects format. If it is the suggestion, the key will be "message". If it is the time required to complete the suggestion from 0 to 120 minutes, the key will be "time". If it is the difficulty to complete the suggestion, the key will be "difficulty". All of my responses will contain items that have all three of those components: "message", "time", "difficulty". All of my responses will contain at least 1 item and at most 3 items. Example: [{"message": "Build an insulating barricade for the buildings","time": "120 minutes","difficulty": "hard"},{"message": "Send an electronic alert to the local residents.","time": "10 minutes","difficulty": "easy"}]`,
         },
       },
       {
@@ -98,7 +98,7 @@ export async function POST(
       topK: 20,
     },
   };
-
+  console.log("req", RequestBody);
   // send request and get response
   const res = await fetch(GeminiEndpoint, {
     method: "POST",
@@ -107,38 +107,21 @@ export async function POST(
 
   const geminiRes = await res.json();
 
-  console.log(geminiRes);
+  console.log("res", geminiRes);
   let geminiTextArray = null;
   try {
     geminiTextArray = geminiRes.candidates[0].content.parts;
     const geminiText = geminiTextArray[0].text;
     let geminiTextObject: {
-      text: string;
-      action?: string;
-      action_link?: string;
-      action_tag?: string;
+      action: string;
+      time: string;
+      difficulty: string;
     }[] = JSON.parse(geminiText);
-    // console.log(geminiTextObject)
-    // HARDCODE: Get only one result
-    geminiTextObject = [geminiTextObject[0]];
-    // parse through the text and then figure out what to search up
-    // console.log(geminiTextObject);
-    for (const [actionIndex, step] of geminiTextObject.entries()) {
-      if (step.action && step.action_link) {
-        // if it is an ACTION_LINK, do a search
-        // parse out the query
-        const query = step.action_link;
-        let hit = await getFirstResultLink(query);
-        // append https:// if it does not start with it
-        if (!hit.startsWith("https://") && !hit.startsWith("http://")) {
-          hit = "https://" + hit;
-        }
-        // replace it in the action link
-        step.action_link = hit;
-      }
-      geminiTextObject[actionIndex] = step;
-    }
-    console.log(geminiTextObject);
+
+    let geminiTextObject1 = [geminiTextObject[0]];
+
+    console.log("men", geminiTextObject1);
+
     const nextRes = NextResponse.json(
       {
         data: geminiTextObject,
@@ -147,8 +130,8 @@ export async function POST(
     );
     return nextRes;
   } catch (e) {
-    console.error(geminiRes);
-    console.error(e);
+    console.error("gem", geminiRes);
+    console.error("e", e);
     return NextResponse.json(
       {
         data: `[{"action": "Consult your on-ground team leader for active assistance.","time": "5","difficulty": "easy"}]`,

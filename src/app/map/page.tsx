@@ -2,7 +2,7 @@
 
 import React, { use, useCallback, useEffect, useMemo, useState } from "react";
 import Badge from "@/components/badge";
-import ChatBot from "@/components/chat/chatbot";
+import Chat from "@/components/chat/chat";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -241,7 +241,7 @@ function Map() {
             />
           </GoogleMap>
         </div>
-        <ChatBot />
+        <Chat />
         {showGroundView && (
           <Card className="bg-geo-black border-none rounded-tl-none relative flex flex-col h-min">
             <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">

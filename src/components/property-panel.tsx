@@ -124,7 +124,7 @@ function Properties() {
           fill="none"
         />
       </svg>
-      <ScrollArea className="pr-4 h-full">
+      <ScrollArea className=" h-full">
         <Accordion type="single" collapsible className="w-full space-y-4">
           {properties.map((property, index) => (
             <Property
