@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useMemo } from "react";
-// import type { NextPage } from "next";
-// import styles from "../styles/Home.module.css";
 import Badge from "@/components/badge";
 import ChatBot from "@/components/chat/chatbot";
 import { Button } from "@/components/ui/button";
@@ -35,7 +33,6 @@ function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
     "places",
   ];
-  const mapCenter = useMemo(() => ({ lat: 33.739755, lng: -117.751285 }), []);
   const house1Center = useMemo(
     () => ({ lat: 33.73753232504521, lng: -117.75110662338541 }),
     [],
@@ -48,6 +45,13 @@ function Map() {
 
   const schoolCenter = useMemo(
     () => ({ lat: 33.73397237402972, lng: -117.75041997787818 }),
+
+    [],
+  );
+
+  const mapCenter = useMemo(
+    () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
+
     [],
   );
 
