@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Badge from "@/components/badge";
 import ChatBot from "@/components/chat/chatbot";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,48 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  CircleF,
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+} from "@react-google-maps/api";
 // import { Loader } from "@googlemaps/js-api-loader";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import { Clock, Route, SendHorizontal } from "lucide-react";
-import { useMutation } from "react-query";
+// import fetch from "isomorphic-unfetch";-----
+import { Route } from "lucide-react";
+import { animated, useSpring } from "react-spring";
+
+const AnimatedCircle = animated(CircleF);
+
+async function convertImageToBase64(url: string): Promise<string> {
+  // Fetch the image
+  const response = await fetch(url);
+  const blob = await response.blob();
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
 
 function Map() {
+  const [base64Image, setBase64Image] = useState("");
+  const imageUrl =
+    "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=YOUR_API_KEY";
+
+  useEffect(() => {
+    convertImageToBase64(imageUrl)
+      .then((base64) => {
+        setBase64Image(base64);
+        console.log(base64);
+      })
+      .catch((error) => console.error(error));
+  }, []); // Empty dependency array ensures this runs once on mount
+
   const mapCenter = useMemo(
     () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
 
@@ -56,8 +92,7 @@ function Map() {
     [],
   );
 
-  const house7Center = useMemo(
-    () => ({ lat: 33.747891, lng: -117.75333 }), []);
+  const house7Center = useMemo(() => ({ lat: 33.747891, lng: -117.75333 }), []);
 
   const house8Center = useMemo(
     () => ({ lat: 33.737464774134956, lng: -117.74992465648853 }),
@@ -75,7 +110,7 @@ function Map() {
 
   //   [],
   // );
-
+  const [showGroundView, setShowGroundView] = useState(false);
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
@@ -85,12 +120,25 @@ function Map() {
     }),
     [],
   );
-
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
-    libraries,
+  });
+  const pulsateAnimation = useSpring({
+    from: { scale: 20 }, // initial radius
+    to: { scale: 30 }, // final radius
+    config: { duration: 1000 }, // animation duration
+    reset: true, // reset animation after it finishes
+    reverse: true, // run the animation in reverse as well
+    loop: true, // loop animation indefinitely
+    onChange(result, ctrl, item) {
+      // console.log("onChange", result.value);
+    },
   });
 
+  const getImage = () => {
+    console.log("image received");
+    // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=YOUR KEY">
+  };
   const uploadScreenshot = async () => {};
   if (!isLoaded) {
     return <p>Loading...</p>;
@@ -98,10 +146,11 @@ function Map() {
   return (
     <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full justify-between w-full relative overflow-none">
       <div className="flex gap-4">
+        {/* <div>{base64Image && <img src={base64Image} alt="Map" />}</div> */}
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
-            zoom={15}
+            zoom={30}
             center={mapCenter}
             mapTypeId={google.maps.MapTypeId.SATELLITE}
             mapContainerStyle={{
@@ -170,55 +219,62 @@ function Map() {
               }}
               title="Hello World!"
             />
-            {[1250, 2500].map((radius, idx) => {
-              return (
-                <CircleF
-                  key={idx}
-                  center={mapCenter}
-                  radius={radius}
-                  onLoad={() => console.log("Circle Load...")}
-                  options={{
-                    fillColor: radius > 2500 ? "green" : "red",
-                    strokeColor: radius > 2500 ? "green" : "red",
-                    strokeOpacity: 0.8,
-                  }}
-                />
-              );
-            })}
+
+            <AnimatedCircle
+              center={mapCenter}
+              radius={20}
+              onLoad={() => console.log("Circle Load...")}
+              style={{
+                transform: pulsateAnimation.scale.to(
+                  (scale) => `scale(${scale})`,
+                ),
+              }}
+              // options={{
+              //   fillColor: pulsateAnimation.radius.to((radius) =>
+              //     radius > 2500 ? "green" : "red",
+              //   ),
+              //   strokeColor: pulsateAnimation.radius.to((radius) =>
+              //     radius > 2500 ? "green" : "red",
+              //   ),
+              //   strokeOpacity: 0.8,
+              // }}
+            />
           </GoogleMap>
         </div>
         <ChatBot />
-        <Card className="bg-geo-black border-none rounded-tl-none relative flex flex-col h-min">
-          <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
-            ground view
-          </CardTitle>
-          <CardContent className="flex items-center h-48">
-            <button className="flex house-image-button"></button>
-          </CardContent>
-          <CardHeader>
-            <CardTitle className="flex w-40 text-white">
-              6996 Petr Avenue, Irvine CA
+        {showGroundView && (
+          <Card className="bg-geo-black border-none rounded-tl-none relative flex flex-col h-min">
+            <CardTitle className="absolute -top-9 p-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-lg">
+              ground view
             </CardTitle>
-            <CardDescription className="flex items-center">
-              <button className="warning-image-button"></button>
-              <span className="ml-2 text-yellow">moderate risk</span>
-            </CardDescription>
-          </CardHeader>
-          <CardFooter className=" flex">
-            <Table className="flex text-white">
-              <TableBody className="w-full">
-                <TableRow className="shadow   flex justify-between">
-                  <TableCell className="font-medium">size</TableCell>
-                  <TableCell className="text-right">240sqft</TableCell>
-                </TableRow>
-                <TableRow className="shadow rounded-lg flex justify-between">
-                  <TableCell className="font-medium">type</TableCell>
-                  <TableCell className="text-right">Townhouse</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardFooter>
-        </Card>
+            <CardContent className="flex items-center h-48">
+              <button className="flex house-image-button"></button>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="flex w-40 text-white">
+                6996 Petr Avenue, Irvine CA
+              </CardTitle>
+              <CardDescription className="flex items-center">
+                <button className="warning-image-button"></button>
+                <span className="ml-2 text-yellow">moderate risk</span>
+              </CardDescription>
+            </CardHeader>
+            <CardFooter className=" flex">
+              <Table className="flex text-white">
+                <TableBody className="w-full">
+                  <TableRow className="shadow   flex justify-between">
+                    <TableCell className="font-medium">size</TableCell>
+                    <TableCell className="text-right">240sqft</TableCell>
+                  </TableRow>
+                  <TableRow className="shadow rounded-lg flex justify-between">
+                    <TableCell className="font-medium">type</TableCell>
+                    <TableCell className="text-right">Townhouse</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardFooter>
+          </Card>
+        )}
       </div>
       <div className="relative flex h-min ">
         <Card className="bg-geo-black border-none">
