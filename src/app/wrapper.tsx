@@ -1,29 +1,51 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import SidebarButton from "@/components/sidebar-button";
 
 interface Props {
   children: React.ReactNode;
 }
+
 function Wrapper(props: Props) {
   const path = usePathname();
-  return path != "/" ? (
+  const [currentTime, setCurrentTime] = useState(getFormattedTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(getFormattedTime());
+    }, 1000); // Update time every second
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  function getFormattedTime() {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  return path !== "/" ? (
     <main className="flex w-full relative overflow-y-auto  h-screen">
       <div className=" flex w-16 bg-geo-black flex-col py-32 px-2 gap-4 items-center">
         <SidebarButton
-          selected={path == "/"}
+          selected={path === "/"}
           src="/logo2.svg"
           url=""
         ></SidebarButton>
         <SidebarButton
-          selected={path == "/home"}
+          selected={path === "/home"}
           src="/houseicon.svg"
           url="home"
         ></SidebarButton>
         <SidebarButton
-          selected={path == "/map"}
+          selected={path === "/map"}
           src="/map2.svg"
           url="map"
         ></SidebarButton>
@@ -34,7 +56,9 @@ function Wrapper(props: Props) {
             Petr Avenue, Irvine California
           </h2>
           <h2 className="text-white font-semibold ">
-            <span className="text-geo-teal">live</span> • 2:04:23 PM [PST]
+            <div>
+              {currentTime} [PST] • <span className="text-geo-teal">live</span>
+            </div>
           </h2>
         </div>
         {props.children}
