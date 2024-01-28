@@ -29,8 +29,32 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
+<<<<<<< HEAD
 import { Route } from "lucide-react";
 import ChatBot from "@/components/chat/chatbot";
+=======
+import axios from "axios";
+import FormData from "form-data";
+import { Clock, Route, SendHorizontal } from "lucide-react";
+
+const uploadFile = async (file: File) => {
+  const data = new FormData();
+  data.append("file", file.arrayBuffer(), {
+    filename: "inf.jpg",
+    contentType: file.type,
+  });
+  console.log(data);
+
+  const resp = await axios.post("/api/inference", data, {
+    headers: {
+      accept: "application/json",
+      "Accept-Language": "en-US,en;q=0.8",
+      "Content-Type": `multipart/form-data`,
+    },
+  });
+  console.log(resp.data);
+};
+>>>>>>> 2ab8851b (axios)
 
 function Map() {
   const libraries: ("places" | "drawing" | "geometry" | "visualization")[] = [
@@ -67,7 +91,6 @@ function Map() {
     libraries,
   });
 
-  const uploadScreenshot = async () => {};
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
@@ -187,7 +210,10 @@ function Map() {
           </CardFooter>
         </Card>
       </div>
-      <Button className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8">
+      <Button
+        className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
+        onClick={() => uploadFile()}
+      >
         <Route></Route>Generate Optimal Route
       </Button>
     </main>
