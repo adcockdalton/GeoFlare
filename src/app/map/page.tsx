@@ -56,7 +56,8 @@ function Map() {
     [],
   );
 
-  const house7Center = useMemo(() => ({ lat: 33.747891, lng: -117.75333 }), []);
+  const house7Center = useMemo(
+    () => ({ lat: 33.747891, lng: -117.75333 }), []);
 
   const house8Center = useMemo(
     () => ({ lat: 33.737464774134956, lng: -117.74992465648853 }),
@@ -256,6 +257,12 @@ function Map() {
         // onClick={() => uploadFile()}
       >
         <Route></Route>Generate Optimal Route
+      </Button>
+      <Button
+        className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-red-500 my-6 bottom-20 right-8"
+        onClick={() => getImage()}
+      >
+        Analyze Fire
       </Button>
     </main>
   );
