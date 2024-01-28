@@ -1,9 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
-import { parse } from "node-html-parser";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export const runtime = "edge";
 
@@ -24,28 +19,10 @@ export async function POST(
     );
   }
 
-  async function getFirstResultLink(query: string) {
-    const ddgQuery = query.split(" ").join("+");
-    // make the query and parse response
-    // https://stackoverflow.com/questions/37012469/duckduckgo-api-getting-search-results
-    const ddgURL = `https://html.duckduckgo.com/html/?q=${ddgQuery}`;
-    const ddgSearchRes = await fetch(ddgURL);
-    const ddgHTML = await ddgSearchRes.text();
-
-    // scrape the first URL
-    const root = parse(ddgHTML);
-    // grab the anchor tags with the results
-    const hits = root.querySelectorAll(".result__url");
-
-    // scrape the first hit
-    return hits[0].innerHTML.trim();
-  }
-
   const API_KEY = process.env.GEMINI_API_KEY;
 
   const GeminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
-  // parse request body, which will be the question
   if (!request.body) {
     return NextResponse.json(
       {
@@ -98,8 +75,7 @@ export async function POST(
       topK: 20,
     },
   };
-  console.log("req", RequestBody);
-  // send request and get response
+
   const res = await fetch(GeminiEndpoint, {
     method: "POST",
     body: JSON.stringify(RequestBody),
@@ -107,7 +83,6 @@ export async function POST(
 
   const geminiRes = await res.json();
 
-  console.log("res", geminiRes);
   let geminiTextArray = null;
   try {
     geminiTextArray = geminiRes.candidates[0].content.parts;
@@ -117,10 +92,6 @@ export async function POST(
       time: string;
       difficulty: string;
     }[] = JSON.parse(geminiText);
-
-    let geminiTextObject1 = [geminiTextObject[0]];
-
-    console.log("men", geminiTextObject1);
 
     const nextRes = NextResponse.json(
       {

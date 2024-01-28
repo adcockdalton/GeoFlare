@@ -286,7 +286,7 @@ function Map() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="font-bold custom-text-color">
+                  <TableHead className=" font-bold custom-text-color">
                     weather
                   </TableHead>
                   <TableHead className="font-bold custom-text-color">

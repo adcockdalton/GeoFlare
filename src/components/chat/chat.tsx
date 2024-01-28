@@ -51,7 +51,7 @@ export default function Chat() {
                   <div className="flex flex-col gap-4">
                     <div className="flex gap-2 items-center">
                       <Avatar className="bg-slate-400 w-6 h-6 rounded-full">
-                        <AvatarFallback>🦊</AvatarFallback>
+                        <AvatarImage src="userLogo.svg" />
                       </Avatar>
                       <span className="text-lg text-white font-light">you</span>
                     </div>
@@ -60,20 +60,17 @@ export default function Chat() {
                     </h2>
 
                     {index == messages.length - 1 && m.role == "user" && (
-                      <div className=" rounded-xl p-4 flex flex-row gap-x-2">
+                      <div className=" rounded-xl p-4 flex flex-row items-center gap-x-6">
                         <Avatar className="size-8">
-                          <AvatarFallback className="bg-geo-teal">
-                            🐸
-                          </AvatarFallback>
+                          <AvatarImage src="botLogo.svg" />
                         </Avatar>
-                        <div className="flex gap-y-2 flex-col">
+                        <div className="flex flex-col">
                           <div className="flex items-center gap-x-2 flex-row">
-                            <span className="font-bold text-xl">
+                            <span className="text-lg text-white font-light">
                               strategist
                             </span>
                           </div>
-
-                          <Loader2 className="animate-spin mx-auto" />
+                          <Loader2 className="text-white animate-spin mx-auto" />
                         </div>
                       </div>
                     )}
@@ -81,13 +78,6 @@ export default function Chat() {
                 ) : (
                   <>
                     <ChatBot index={index} messages={messages} m={m} />
-                    <div className="flex flex-col items-center justify-center mt-4">
-                      <div className="mx-auto">
-                        <span className="font-bold text-xl text-geo-teal text-opacity-50  text-center">
-                          Ask a follow-up question
-                        </span>
-                      </div>
-                    </div>
                   </>
                 )}
               </div>
