@@ -6,19 +6,31 @@ import SidebarButton from "@/components/sidebar-button";
 
 interface Props {
   children: React.ReactNode;
+  currentTime: string; // Add currentTime prop
 }
 
 function Wrapper(props: Props) {
   const path = usePathname();
-  const [currentTime, setCurrentTime] = useState(getFormattedTime());
+  const [currentTime, setCurrentTime] = useState(props.currentTime); // Use prop value
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(getFormattedTime());
-    }, 1000); // Update time every second
+    let animationFrameId: number;
+    let isMounted = true;
+
+    const updateTime = () => {
+      if (isMounted) {
+        setCurrentTime(getFormattedTime());
+        animationFrameId = requestAnimationFrame(updateTime);
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      animationFrameId = requestAnimationFrame(updateTime);
+    }
 
     return () => {
-      clearInterval(interval);
+      isMounted = false;
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 

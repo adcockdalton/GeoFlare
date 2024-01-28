@@ -1,6 +1,14 @@
 "use client";
 
-import React, { use, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  use,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import Image from "next/image";
 import Badge from "@/components/badge";
 import Chat from "@/components/chat/chat";
 import { Button } from "@/components/ui/button";
@@ -26,6 +34,7 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
+import axios from "axios";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
 
@@ -45,10 +54,12 @@ async function convertImageToBase64(url: string): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
-
 function Map() {
   const [base64Image, setBase64Image] = useState("");
+  const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
+  const [boxes, setBoxes] = useState([]);
+  const ref = useRef<any>();
   const imageUrl =
     "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM";
 
@@ -59,11 +70,11 @@ function Map() {
         console.log(base64);
       })
       .catch((error) => console.error(error));
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   const mapCenter = useMemo(
-    () => ({ lat: 33.745604, lng: -117.742148 }),
-     []
+    () => ({ lat: 33.52287157408444, lng: -117.66006159077706 }),
+    [],
   );
 
   const house2Center = useMemo(
@@ -108,7 +119,17 @@ function Map() {
 
   //   [],
   // );
+  async function getCV() {
+    const resp = await axios.get(
+      `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=20`,
+    );
+    console.log(resp.data);
+    setImage("data:image/png;base64," + resp.data.image);
+    setBoxes(resp.data.boxes);
+  }
+
   const [showGroundView, setShowGroundView] = useState(false);
+
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
@@ -154,6 +175,7 @@ function Map() {
     <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full justify-between w-full relative overflow-none">
       <div className="flex gap-4">
         {/* <div>{base64Image && <img src={base64Image} alt="Map" />}</div> */}
+
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
@@ -234,12 +256,12 @@ function Map() {
               onLoad={() => console.log("Circle Load...")}
               options={{
                 fillColor: pulsateAnimation.radius
-                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
                 fillOpacity:
                   0.6,
                 strokeColor: pulsateAnimation.radius
-                  .to((radius) => (radius > 2500 ? "green" : "red"))
+                  .to((radius) => (radius > 2500 ? "green" : "dodgerblue"))
                   .get(),
                 strokeOpacity: 0.6
               }}
@@ -317,6 +339,38 @@ function Map() {
           </CardFooter>
         </Card>
       </div>
+      <div className="absolute bottom-56 right-8">
+        {image && (
+          <div className="w-[30rem] h-[30rem] relative outline-2 outline rounded-xl rounded-t-lg">
+            <CardTitle className="absolute -top-9 py-2 bg-geo-dark text-white text-sm font-medium px-8 rounded-t-xl">
+              fauna detection
+            </CardTitle>
+            <img
+              src={image}
+              width="1920"
+              height="1080"
+              className="z-50 shadow-2xl  outline-geo-teal   aspect-square w-full h-full  right-8 bottom-52  ring-black filter  rounded-tl-none  "
+              alt="Map"
+              ref={ref}
+            />
+            {boxes?.map((box) => (
+              <div
+                className="hover:opacity-50 transition-opacity duration-300 ease-in-out cursor-pointer filter brightness-200"
+                style={{
+                  zIndex: 100,
+                  position: "absolute",
+                  top: (box[1] / 1080) * ref?.current?.height,
+                  left: (box[0] / 1080) * ref?.current?.width,
+                  width: (box[2] / 1080) * ref?.current?.width,
+                  height: (box[3] / 1080) * ref?.current?.height,
+                  border: "4px solid dodgerblue",
+                  backgroundColor: "rgba(255,255,255,0.4)",
+                }}
+              ></div>
+            ))}
+          </div>
+        )}
+      </div>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
         // onClick={() => uploadFile()}
@@ -325,7 +379,7 @@ function Map() {
       </Button>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-red-500 my-6 bottom-20 right-8"
-        onClick={() => getImage()}
+        onClick={() => getCV()}
       >
         Analyze Fire
       </Button>
