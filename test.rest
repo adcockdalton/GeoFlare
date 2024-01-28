@@ -1,0 +1,1 @@
+GET https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyDEeRLQUVP2qJ1Q1_iiVYIziCdDUPzgqsc HTTP/1.1
