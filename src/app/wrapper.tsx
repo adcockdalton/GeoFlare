@@ -10,7 +10,7 @@ interface Props {
 
 function Wrapper(props: Props) {
   const path = usePathname();
-  let currentTimeVal = getFormattedTime();
+  const currentTimeVal = getFormattedTime();
   const [currentTime, setCurrentTime] = useState(currentTimeVal); // Use prop value
 
   useEffect(() => {
