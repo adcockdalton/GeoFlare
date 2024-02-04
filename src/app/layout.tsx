@@ -27,6 +27,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
+  currentTime: string;
 }) {
   return (
     <html lang="en">
