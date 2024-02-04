@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -39,7 +38,7 @@ function Strategies() {
       </div>
       <div className="content">
         <div className="space-y-4 rounded-xl">
-          {actions.map((action, index, image_url) => (
+          {actions.map((action, index) => (
             <Action
               key={index}
               title={action.title}

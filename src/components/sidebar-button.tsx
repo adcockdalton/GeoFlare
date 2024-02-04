@@ -11,6 +11,7 @@ function SidebarButton(props: Props) {
   return (
     <Link href={"/" + props.url}>
       <Image
+        alt="sidebar button"
         priority
         width={50}
         height={50}

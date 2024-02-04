@@ -2,10 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge";
 
-export async function POST(
-  request: NextRequest,
-  { params }: any,
-): Promise<any> {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   const reqJSON = await request.json();
   const question = reqJSON.messages.at(-1).content;
 
@@ -87,7 +84,7 @@ export async function POST(
   try {
     geminiTextArray = geminiRes.candidates[0].content.parts;
     const geminiText = geminiTextArray[0].text;
-    let geminiTextObject: {
+    const geminiTextObject: {
       action: string;
       time: string;
       difficulty: string;

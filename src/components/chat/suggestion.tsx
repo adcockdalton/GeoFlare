@@ -43,19 +43,19 @@ function Suggestion({ suggestion, launch_time, difficulty }: SuggestionProps) {
       }`}
       onClick={handleSuggestionClick}
     >
-      <h2 className="text-white font-medium pb-2">{suggestion}</h2>
+      <h2 className="text-white font-medium pb-2 text-lg">{suggestion}</h2>
       <CardContent className="flex p-0 flex-col gap-2 items-center">
         <div className="flex justify-between text-sm font-medium items-center w-full">
-          <h4 className="text-slate-400">launch time</h4>
+          <h4 className="text-slate-400 text-sm p-0">launch time</h4>
           <div className="flex items-center gap-1 px-2 py-1 bg-geo-light rounded-lg text-white">
             <Clock></Clock>
-            <h4>{launch_time}</h4>
+            <h4 className="text-sm p-0">{launch_time}</h4>
           </div>
         </div>
         <div className="flex justify-between text-sm font-medium items-center w-full">
-          <h4 className="text-slate-400">difficulty</h4>
+          <h4 className="text-slate-400 text-sm p-0">difficulty</h4>
           <div className="flex items-center gap-1 px-2 py-1 bg-geo-light rounded-lg text-white">
-            <h4>{difficulty}</h4>
+            <h4 className="text-sm p-0 pb-px">{difficulty}</h4>
           </div>
         </div>
       </CardContent>

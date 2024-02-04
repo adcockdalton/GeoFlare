@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   Accordion,
   AccordionContent,
@@ -150,7 +151,7 @@ export function Property({ address, owner, risks, image_url }: PropertyProps) {
         </span>
       </AccordionTrigger>
       <AccordionContent>
-        <img src={image_url} alt="Image" />
+        <Image src={image_url} alt="Image" />
       </AccordionContent>
       <div className="flex justify-between items-end">
         {" "}

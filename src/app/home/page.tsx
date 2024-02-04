@@ -2,8 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import Badge from "@/components/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,14 +11,14 @@ import {
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AlertTriangle, ArrowUpRightIcon, Clock, HomeIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 
 function Home() {
-  const router = useRouter();
+  //const router = useRouter();
 
-  const handleRedirectClick = (link: string) => {
-    router.push(link);
-  };
+  //const handleRedirectClick = (link: string) => {
+  // router.push(link);
+  //};
 
   return (
     <div
@@ -97,8 +95,13 @@ function Home() {
                 </div>
               </div>
               <Link href="/map">
-              <Button className="  text-lg p-7" style={{backgroundColor:'#2A3139', }}>Launch
-              <ArrowUpRightIcon /></Button>
+                <Button
+                  className="  text-lg p-7"
+                  style={{ backgroundColor: "#2A3139" }}
+                >
+                  Launch
+                  <ArrowUpRightIcon />
+                </Button>
               </Link>
             </Card>
           </CardContent>

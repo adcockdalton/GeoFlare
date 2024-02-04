@@ -1,12 +1,12 @@
 import React from "react";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar } from "../ui/avatar";
 import { Button } from "../ui/button";
 import Suggestions, { SuggestionProps } from "./suggestion";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Message } from "ai";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { child, getDatabase, push, ref, set, update } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 import { motion } from "framer-motion";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -52,14 +52,19 @@ const ChatBot: React.FC<ChatBotProps> = ({ m }) => {
     ];
   }
 
-  const formattedSuggestions = mJSONBlocks.map((block: any) => ({
+  interface Block {
+    message: string;
+    time: string;
+    difficulty: string;
+  }
+
+  const formattedSuggestions = mJSONBlocks.map((block: Block) => ({
     suggestion: block.message,
     launch_time: block.time,
     difficulty: block.difficulty,
   }));
 
   function acceptMission(
-    e: any,
     ipt_id: string,
     ipt_suggestion: string | undefined,
     ipt_launch_time: string | undefined,
@@ -78,7 +83,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ m }) => {
       difficulty: difficulty,
     };
 
-    const updates: { [key: string]: any } = {};
+    interface MissionBlock {
+      id: string;
+      suggestion: string;
+      launch_time: string;
+      difficulty: string;
+    }
+
+    const updates: { [key: string]: MissionBlock } = {};
     updates["/mission/" + mission_id] = mission;
 
     return update(ref(database), updates);
@@ -106,10 +118,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ m }) => {
         </div>
         <Button
           className="bg-geo-teal text-white text-lg py-6"
-          onClick={(e) =>
+          onClick={() =>
             formattedSuggestions.forEach((suggestion: SuggestionProps) => {
               acceptMission(
-                e,
                 suggestion.suggestion
                   .split("")
                   .reduce(

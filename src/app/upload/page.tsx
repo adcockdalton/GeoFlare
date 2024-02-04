@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -24,8 +22,6 @@ import {
 } from "@/components/ui/table";
 
 function UploadPage() {
-  const x = 5;
-
   const router = useRouter();
 
   const handleRedirectClick = (link: string) => {

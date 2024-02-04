@@ -1,15 +1,6 @@
 "use client";
 
-import React, {
-  use,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import Image from "next/image";
-import Badge from "@/components/badge";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Chat from "@/components/chat/chat";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,15 +27,7 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
-import {
-  child,
-  get,
-  getDatabase,
-  push,
-  ref,
-  set,
-  update,
-} from "firebase/database";
+import { get, getDatabase, ref } from "firebase/database";
 import { motion } from "framer-motion";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
@@ -88,7 +71,7 @@ async function convertImageToBase64(url: string): Promise<string> {
   });
 }
 function Map() {
-  const [base64Image, setBase64Image] = useState("");
+  //const [base64Image, setBase64Image] = useState("");
   const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
   const [boxes, setBoxes] = useState([]);
@@ -99,7 +82,7 @@ function Map() {
   useEffect(() => {
     convertImageToBase64(imageUrl)
       .then((base64) => {
-        setBase64Image(base64);
+        //setBase64Image(base64);
         console.log(base64);
       })
       .catch((error) => console.error(error));

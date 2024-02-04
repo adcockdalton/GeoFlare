@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import ChatBot from "@/components/chat/chatbot";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
-import { ArrowUp, Loader2, MoveDiagonal, Plus, Sparkles } from "lucide-react";
+import { ArrowUp, Loader2 } from "lucide-react";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
