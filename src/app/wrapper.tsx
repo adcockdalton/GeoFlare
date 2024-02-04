@@ -6,12 +6,12 @@ import SidebarButton from "@/components/sidebar-button";
 
 interface Props {
   children: React.ReactNode;
-  currentTime: string; // Add currentTime prop
 }
 
 function Wrapper(props: Props) {
   const path = usePathname();
-  const [currentTime, setCurrentTime] = useState(props.currentTime); // Use prop value
+  let currentTimeVal = getFormattedTime();
+  const [currentTime, setCurrentTime] = useState(currentTimeVal); // Use prop value
 
   useEffect(() => {
     let animationFrameId: number;
