@@ -64,10 +64,10 @@ function Wrapper(props: Props) {
       </div>
       <div className="flex flex-1 flex-col bg-geo-black pr-4 pb-4   relative">
         <div className="flex justify-between my-3">
-          <h2 className="text-white  font-semibold ">
+          <h2 className="text-white  font-semibold text-lg ">
             Petr Avenue, Irvine California
           </h2>
-          <h2 className="text-white font-semibold ">
+          <h2 className="text-white font-semibold  text-lg">
             <div>
               {currentTime} [PST] • <span className="text-geo-teal">live</span>
             </div>
