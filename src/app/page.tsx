@@ -83,7 +83,7 @@ export default function Home() {
                     1500,
                   ]}
                   wrapper="span"
-                  speed={180}
+                  speed={15}
                   repeat={Infinity}
                 />
               </span>
@@ -124,7 +124,7 @@ export default function Home() {
                       " Removing the uncertainty",
                     ]}
                     wrapper="span"
-                    speed={180}
+                    speed={15}
                   />
                 )}
               </span>{" "}
