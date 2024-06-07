@@ -16,14 +16,13 @@ import { motion } from "framer-motion";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "geoflare.firebaseapp.com",
-  databaseURL: "https://geoflare-default-rtdb.firebaseio.com",
-  projectId: "geoflare",
-  storageBucket: "geoflare.appspot.com",
-  messagingSenderId: "149802851296",
-  appId: "1:149802851296:web:c86016fe23157afa5b6985",
-  measurementId: "G-HKFQSQM52X",
+  apiKey           : process.env.GEMINI_API_KEY,
+  authDomain       : "geoflare-e56a6.firebaseapp.com",
+  databaseURL      : "https://geoflare-e56a6-default-rtdb.firebaseio.com",
+  projectId        : "geoflare-e56a6",
+  storageBucket    : "geoflare-e56a6.appspot.com",
+  messagingSenderId: "22597622869",
+  appId            : "1:22597622869:web:1e0c2e2d98e002fbd888dc"
 };
 
 // Initialize Firebase

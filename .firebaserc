@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "geoflare"
-  }
+    "default": "geoflare",
+    "geoflare": "geoflare-e56a6"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
