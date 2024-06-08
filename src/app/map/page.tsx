@@ -32,82 +32,82 @@ import { motion } from "framer-motion";
 import { Route } from "lucide-react";
 import { animated, easings, useSpring } from "react-spring";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+/**
+ * Firebase configuration object.
+ */
 const firebaseConfig = {
-  apiKey           : process.env.FIREBASE_API_KEY,
-  authDomain       : "geoflare-e56a6.firebaseapp.com",
-  databaseURL      : "https://geoflare-e56a6-default-rtdb.firebaseio.com",
-  projectId        : "geoflare-e56a6",
-  storageBucket    : "geoflare-e56a6.appspot.com",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "geoflare-e56a6.firebaseapp.com",
+  databaseURL: "https://geoflare-e56a6-default-rtdb.firebaseio.com",
+  projectId: "geoflare-e56a6",
+  storageBucket: "geoflare-e56a6.appspot.com",
   messagingSenderId: "22597622869",
-  appId            : "1:22597622869:web:1e0c2e2d98e002fbd888dc"
+  appId: "1:22597622869:web:1e0c2e2d98e002fbd888dc",
 };
 
-// Initialize Firebase
-const app        = initializeApp(firebaseConfig);
-const database   = getDatabase(app);
+/**
+ * Initializes the Firebase app with the provided configuration.
+ *
+ * @param {Object} firebaseConfig - The configuration object for Firebase.
+ * @returns {FirebaseApp} The initialized Firebase app.
+ */
+const app      = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+/**
+ * Creates a reference to the "mission" node in the database.
+ * 
+ * @param {FirebaseDatabase} database - The Firebase database instance.
+ * @returns {FirebaseDatabaseReference} - The reference to the "mission" node.
+ */
 const missionRef = ref(database, "mission");
 
-const AnimatedCircle = animated(CircleF);
 
 
 
+
+/**
+ * Renders the Map component.
+ *
+ * This component displays a Google Map with markers and overlays. It also includes functionality
+ * for retrieving computer vision data and handling marker click events.
+ *
+ * @returns The rendered Map component.
+ */
 function Map() {
-  //const [base64Image, setBase64Image] = useState("");
   const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
   const [boxes, setBoxes] = useState([]);
   const ref = useRef<any>();
+  const [showGroundView, setShowGroundView] = useState(false);
 
+  const locations = [
+    { lat: 33.74513670122371, lng: -117.74688633807939 },
+    { lat: 33.73921856606024, lng: -117.7532953058211 },
+    { lat: 33.740958, lng: -117.743388 },
+    { lat: 33.74174935389506, lng: -117.7380577830899 },
+    { lat: 33.74015345684956, lng: -117.73795506714471 },
+    { lat: 33.752066, lng: -117.747864 },
+    { lat: 33.747891, lng: -117.75333 },
+    { lat: 33.737464774134956, lng: -117.74992465648853 },
+    { lat: 33.73397237402972, lng: -117.75041997787818 },
+  ];
 
-  const mapCenter = useMemo(
-    () => ({ lat: 33.74513670122371, lng: -117.74688633807939 }),
-    [],
-  );
+  const mapCenter    = useMemo(() => locations[0], []);
+  const house2Center = useMemo(() => locations[1], []);
+  const house3Center = useMemo(() => locations[2], []);
+  const house4Center = useMemo(() => locations[3], []);
+  const house5Center = useMemo(() => locations[4], []);
+  const house6Center = useMemo(() => locations[5], []);
+  const house7Center = useMemo(() => locations[6], []);
+  const house8Center = useMemo(() => locations[7], []);
+  const schoolCenter = useMemo(() => locations[8], []);
 
-  const house2Center = useMemo(
-    () => ({ lat: 33.73921856606024, lng: -117.7532953058211 }),
-    [],
-  );
-
-  const house3Center = useMemo(
-    () => ({ lat: 33.740958, lng: -117.743388 }),
-    [],
-  );
-
-  const house4Center = useMemo(
-    () => ({ lat: 33.74174935389506, lng: -117.7380577830899 }),
-    [],
-  );
-
-  const house5Center = useMemo(
-    () => ({ lat: 33.74015345684956, lng: -117.73795506714471 }),
-    [],
-  );
-  const house6Center = useMemo(
-    () => ({ lat: 33.752066, lng: -117.747864 }),
-    [],
-  );
-
-  const house7Center = useMemo(() => ({ lat: 33.747891, lng: -117.75333 }), []);
-
-  const house8Center = useMemo(
-    () => ({ lat: 33.737464774134956, lng: -117.74992465648853 }),
-    [],
-  );
-
-  const schoolCenter = useMemo(
-    () => ({ lat: 33.73397237402972, lng: -117.75041997787818 }),
-
-    [],
-  );
-
-
+  /**
+   * Retrieves computer vision data from the server based on the map center and zoom level.
+   * @param mapCenter - The center of the map.
+   * @returns The computer vision data.
+   */
   async function getCV() {
     try {
       const resp = await axios.get(
@@ -118,13 +118,13 @@ function Map() {
       setBoxes(resp.data.boxes);
     } catch (error) {
       console.error(error);
-      // Handle the error here
     }
   }
 
-  const [showGroundView, setShowGroundView] = useState(false);
-
-  const mapOptions = useMemo<google.maps.MapOptions>(
+  /**
+   * Options for configuring the map.
+   */
+  const mapOptions = useMemo(
     () => ({
       disableDefaultUI: true,
       mapTypeId: "satellite",
@@ -133,9 +133,34 @@ function Map() {
     }),
     [],
   );
+
+  /**
+   * Loads the Google Maps API using the provided API key.
+   * 
+   * @remarks
+   * This hook is used to check if the Google Maps API has been loaded successfully.
+   *
+   * @param googleMapsApiKey - The API key for accessing the Google Maps API.
+   * @returns An object containing the `isLoaded` property, which indicates whether the Google Maps API has been loaded.
+   */
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
   });
+
+
+
+  /**
+   * An animation that creates a pulsating effect by changing the radius of an element.
+   *
+   * @remarks
+   * This animation uses the `useSpring` hook from the `react-spring` library to animate the radius of an element.
+   * The `from` and `to` properties define the initial and final radius values, respectively.
+   * The `config` property specifies the duration and easing function for the animation.
+   * The `onChange` callback is called whenever the radius value changes, and it updates the `rad` state variable.
+   * The `loop` property is set to `true` to make the animation repeat indefinitely.
+   *
+   * @returns The pulsate animation object.
+   */
   const pulsateAnimation = useSpring({
     from: { radius: 300 },
     to: { radius: 1000 },
@@ -143,21 +168,30 @@ function Map() {
       duration: 2000,
       easing: easings.easeInOutCirc,
     },
+
     onChange(result) {
       setRad(result.value.radius);
     },
     loop: true,
 
-    // reverse: true,
+
   });
 
-  // showGroundView
+  const AnimatedCircle = animated(CircleF);
+
+  
+
+
+  /**
+   * Handles the click event on a marker.
+   * Toggles the `showGroundView` state to show or hide the ground view.
+   */
   const handleMarkerClick = () => {
     console.log("Card clicked");
     setShowGroundView((showGroundView) => !showGroundView);
   };
 
-  
+
 
   const [missions, setMissions] = useState<any[]>([]);
 
@@ -165,6 +199,11 @@ function Map() {
     getMissions();
   }, [missions]);
 
+  /**
+   * Retrieves missions from the specified mission reference and updates the state with the retrieved missions.
+   * @param missionRef - The reference to the mission data in the Firebase Realtime Database.
+   * @returns The updated missions.
+   */
   function getMissions() {
     get(missionRef).then((snapshot) => {
       const updatedMissions: any[] = [];
@@ -175,14 +214,16 @@ function Map() {
     });
   }
 
+
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
+
+
+
   return (
     <main className="flex bg-geo-grey px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full justify-between w-full relative overflow-none">
       <div className="flex gap-4">
-        {/* <div>{base64Image && <img src={base64Image} alt="Map" />}</div> */}
-
         <div className="rounded-xl ">
           <GoogleMap
             options={mapOptions}
@@ -388,16 +429,12 @@ function Map() {
           </motion.div>
         )}
       </div>
-      <Button
-        className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8"
-        // onClick={() => uploadFile()}
-      >
+      <Button className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-geo-teal bottom-8 right-8">
         <Route></Route>Generate Optimal Route
       </Button>
       <Button
         className="flex gap-2 py-8 px-4 text-white absolute text-xl bg-red-500 my-6 bottom-20 right-8"
-        onClick={() => getCV()}
-      >
+        onClick={() => getCV()}>
         Analyze Fire
       </Button>
     </main>
