@@ -13,6 +13,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowUpRightIcon } from "lucide-react";
 
+/**
+ * Renders the Home component.
+ *
+ * This component displays a form where users can enter a location and create a map.
+ * It also shows a list of critical locations near the user, along with their risk level, time, and number of homes at risk.
+ *
+ * @returns The rendered Home component.
+ */
 function Home() {
   return (
     <div
@@ -60,7 +68,7 @@ function Home() {
             >
               <div className="flex justify-between  h-full flex-col w-full gap-6 overflow-x-auto">
                 <CardTitle className="text-white">
-                  Anteatery Hills, Irvine
+                  Orchard Hills, Irvine, CA
                 </CardTitle>
 
                 <div className="flex justify-start gap-4 text-sm font-medium items-center w-full ">
@@ -83,7 +91,54 @@ function Home() {
                     style={{ backgroundColor: "", color: "#fff" }}
                   >
                     <FontAwesomeIcon icon={faHouse} />
-                    28 homes at risk
+                    735 homes at risk
+                  </div>
+                </div>
+              </div>
+              <Link href="/map">
+                <Button
+                  className="  text-lg p-7"
+                  style={{ backgroundColor: "#2A3139" }}
+                >
+                  Launch
+                  <ArrowUpRightIcon />
+                </Button>
+              </Link>
+            </Card>
+          </CardContent>
+          <CardContent className="flex items-center justify-between  ">
+            <Card
+              className=" flex w-full items-center relative cursor-pointer hover:shadow-md border-geo-grey border-3 p-7 gap-8  "
+              style={{
+                backgroundColor: "#1C2125",
+                border: "3px solid rgba(255, 255, 255, .1)",
+              }}
+            >
+              <div className="flex justify-between  h-full flex-col w-full gap-6 overflow-x-auto">
+                <CardTitle className="text-white">
+                  Temple City Park, Irvine, CA
+                </CardTitle>
+
+                <div className="flex justify-start gap-4 text-sm font-medium items-center w-full ">
+                  <div
+                    className="tag items-center"
+                    style={{ backgroundColor: "#8a877e", color: "#f2cb66" }}
+                  >
+                    <FontAwesomeIcon icon={faTriangleExclamation} />
+                    Low risk
+                  </div>
+                  <div
+                    className="tag items-center"
+                    style={{ backgroundColor: "", color: "#fff" }}
+                  >
+                    <FontAwesomeIcon icon={faClock} />
+                    65 minutes
+                  </div>
+                  <div
+                    className="tag items-center"
+                    style={{ backgroundColor: "", color: "#fff" }}
+                  >
+                    <FontAwesomeIcon icon={faHouse} />5 homes at risk
                   </div>
                 </div>
               </div>
