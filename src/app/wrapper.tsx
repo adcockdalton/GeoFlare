@@ -18,9 +18,7 @@ interface Props {
  * @returns {JSX.Element} The rendered wrapper component.
  */
 function Wrapper(props: Props) {
-  // Get the current path using the usePathname hook from the next/navigation package
   const path = usePathname();
-  // Initialize the currentTime state variable with an empty string
   const [currentTime, setCurrentTime] = useState("");
 
   // useEffect hook is used to perform side effects in functional components
