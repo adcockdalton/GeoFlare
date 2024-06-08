@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
  * Firebase configuration object.
  */
 const firebaseConfig = {
-    apiKey           : process.env.GEMINI_API_KEY,
+    apiKey           : process.env.FIREBASE_API_KEY,
     authDomain       : "geoflare-e56a6.firebaseapp.com",
     databaseURL      : "https://geoflare-e56a6-default-rtdb.firebaseio.com",
     projectId        : "geoflare-e56a6",

@@ -36,3 +36,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 s.rtf
+
+# cv data
+/cv_model
+/cv_model/datasets
+
+#venv
+/src/backend/venv

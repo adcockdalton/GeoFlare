@@ -39,7 +39,7 @@ import { animated, easings, useSpring } from "react-spring";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey           : process.env.GEMINI_API_KEY,
+  apiKey           : process.env.FIREBASE_API_KEY,
   authDomain       : "geoflare-e56a6.firebaseapp.com",
   databaseURL      : "https://geoflare-e56a6-default-rtdb.firebaseio.com",
   projectId        : "geoflare-e56a6",
@@ -55,40 +55,18 @@ const missionRef = ref(database, "mission");
 
 const AnimatedCircle = animated(CircleF);
 
-async function convertImageToBase64(url: string): Promise<string> {
-  // Fetch the image
-  const response = await fetch(url);
-  const blob = await response.blob();
 
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      resolve(reader.result as string);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+
 function Map() {
   //const [base64Image, setBase64Image] = useState("");
   const [image, setImage] = useState("");
   const [rad, setRad] = useState(10);
   const [boxes, setBoxes] = useState([]);
   const ref = useRef<any>();
-  const imageUrl =
-    "https://maps.googleapis.com/maps/api/staticmap?center=Golden%Gate%Bridge&zoom=17&size=500x500&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM";
 
-  useEffect(() => {
-    convertImageToBase64(imageUrl)
-      .then((base64) => {
-        //setBase64Image(base64);
-        console.log(base64);
-      })
-      .catch((error) => console.error(error));
-  }, []);
 
   const mapCenter = useMemo(
-    () => ({ lat: 33.74503670122371, lng: -117.74688633807939 }),
+    () => ({ lat: 33.74513670122371, lng: -117.74688633807939 }),
     [],
   );
 
@@ -135,12 +113,17 @@ function Map() {
   //   [],
   // );
   async function getCV() {
-    const resp = await axios.get(
-      `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=20`,
-    );
-    console.log(resp.data);
-    setImage("data:image/png;base64," + resp.data.image);
-    setBoxes(resp.data.boxes);
+    try {
+      const resp = await axios.get(
+        `/api/inference?center=${mapCenter.lat},${mapCenter.lng}&zoom=20`,
+      );
+      console.log(resp.data);
+      setImage("data:image/png;base64," + resp.data.image);
+      setBoxes(resp.data.boxes);
+    } catch (error) {
+      console.error(error);
+      // Handle the error here
+    }
   }
 
   const [showGroundView, setShowGroundView] = useState(false);
@@ -178,11 +161,7 @@ function Map() {
     setShowGroundView((showGroundView) => !showGroundView);
   };
 
-  const getImage = () => {
-    console.log("image received");
-    // <img src="https://maps.googleapis.com/maps/api/staticmap?center=59.914002,10.737944&zoom=15&size=400x400&key=AIzaSyCWNp13sfV5NkyDvm_81lWnT4CvChjw9sM">
-  };
-  const uploadScreenshot = async () => {};
+  
 
   const [missions, setMissions] = useState<any[]>([]);
 

@@ -28,21 +28,21 @@ export default function Home() {
       {/* Navigation */}
       <nav>
         <ul className="flex-row">
-          {/* Logo */}
-          <div
-            className="nav-sides"
-            style={{ borderRight: "1px solid #fff", paddingRight: "28px" }}
-          >
-            <Image
-              src="./geoFlareLogo.svg"
-              alt=""
-              style={{ maxWidth: "150px" }}
-              width={150}
-              height={50}
-            />
-          </div>
+                <div
+                className="nav-sides"
+                style={{ borderRight: "1px solid #fff", paddingRight: "28px" }}
+                >
+                <Image
+                  src="./geoFlareLogo.svg"
+                  alt=""
+                  style={{ maxWidth: "150px", width: "auto", height: "auto" }}
+                  width={150}
+                  height={50}
+                  priority
+                />
+                </div>
 
-          {/* Menu */}
+                {/* Menu */}
           <li className="flex-row">
             <a href="#" target="_blank" rel="noopener noreferrer">
               About us
@@ -127,6 +127,7 @@ export default function Home() {
               style={{ paddingTop: "15vh", width: "1500px" }}
               width={1500}
               height={1000}
+              priority
             />
           </div>
         </div>
@@ -140,6 +141,7 @@ export default function Home() {
             alt=""
             width={400}
             height={250}
+            style={{ width: "auto", height: "auto" }}
           />
 
           {/* Description */}
@@ -175,6 +177,7 @@ export default function Home() {
             alt=""
             width={400}
             height={250}
+            style={{ width: "auto", height: "auto" }}
           />
           </div>
         </div>
