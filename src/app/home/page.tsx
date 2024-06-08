@@ -14,12 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowUpRightIcon } from "lucide-react";
 
 function Home() {
-  //const router = useRouter();
-
-  //const handleRedirectClick = (link: string) => {
-  // router.push(link);
-  //};
-
   return (
     <div
       className="flex flex-col  bg-geo-dark px-8 pb-8  rounded-xl  pt-16 overflow-y-auto h-full items-center "
@@ -63,7 +57,6 @@ function Home() {
                 backgroundColor: "#1C2125",
                 border: "3px solid rgba(255, 255, 255, .1)",
               }}
-              //   onClick={() => handleRedirectClick("/unknown")}
             >
               <div className="flex justify-between  h-full flex-col w-full gap-6 overflow-x-auto">
                 <CardTitle className="text-white">
@@ -107,34 +100,6 @@ function Home() {
           </CardContent>
         </Card>
       </div>
-      {/* <div className="container flex items-center justify-between">
-        <Card>
-          <CardContent className="flex items-center h-96">
-            <button className="house-image-button"></button>
-          </CardContent>
-          <CardHeader>
-            <CardTitle>6996 Petr Avenue, Irvine CA</CardTitle>
-            <CardDescription className="flex items-center">
-              <button className="warning-image-button"></button>
-              <span className="ml-2">moderate risk</span>
-            </CardDescription>
-          </CardHeader>
-          <CardFooter className="m-1">
-            <Table>
-              <TableBody>
-                <TableRow className="shadow rounded-lg">
-                  <TableCell className="font-medium">size</TableCell>
-                  <TableCell className="text-right">240sqft</TableCell>
-                </TableRow>
-                <TableRow className="shadow rounded-lg">
-                  <TableCell className="font-medium">type</TableCell>
-                  <TableCell className="text-right">Townhouse</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardFooter>
-        </Card>
-      </div> */}
     </div>
   );
 }

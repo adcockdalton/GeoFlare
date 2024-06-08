@@ -107,11 +107,7 @@ function Map() {
     [],
   );
 
-  // const mapCenter = useMemo(
-  //   () => ({ lat: 34.26298363160121, lng: -116.88495070901917 }),
 
-  //   [],
-  // );
   async function getCV() {
     try {
       const resp = await axios.get(
