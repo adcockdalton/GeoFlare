@@ -7,11 +7,17 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 import base64
 import requests
-import os
+from dotenv import load_dotenv
 
 app = FastAPI()
 model_path = os.path.join(os.getcwd(), 'models', 'best.pt')
 model = YOLO(model_path)
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the API key
+api_key = os.getenv("NEXT_PUBLIC_GOOGLE_MAPS_KEY")
 
 
 def predict(image):
@@ -42,11 +48,6 @@ def overlay_rectangles(image, xyxys):
     return img
 
 
-# results, image = predict(Image.open("test2.jpg"))
-# results = to_list(results)
-# print("done")
-
-# print("rec")
 
 
 @app.get("/inference")
@@ -56,7 +57,7 @@ async def inference(
 ):
     print(center)
     r = requests.get(
-        f"https://maps.googleapis.com/maps/api/staticmap?center={center}&zoom={zoom}&scale=1&maptype=satellite&size=1920x1080&key={os.environ['NEXT_PUBLIC_GOOGLE_MAPS_KEY']}",
+        f"https://maps.googleapis.com/maps/api/staticmap?center={center}&zoom={zoom}&scale=1&maptype=satellite&size=1920x1080&key={api_key}",
         "res.png",
     )
 
