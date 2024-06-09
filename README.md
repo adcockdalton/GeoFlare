@@ -7,9 +7,10 @@ We were inspired by strides made in military defense startups like Palantir and 
 
 You can view the platform at: https://geo-flare.vercel.app/
 
+![alt text](https://github.com/[adcockdalton]/[GeoFlare]/blob/[branch]/app_image.png?raw=true)
 
 ## Tech Stack
 
- The front end was created using React, SASS (for the landing page), Tailwind.css, Typescript, and Next.js. The backend was developed using Node.js, FireBase, Python, and FastAPI with Gemini/pytorch integrations for the ML model and the chatbot interface.
+ The front end was created using React, SASS (for the landing page), Tailwind.css, Typescript, and Next.js. The backend was developed using Node.js, FireBase, Python, and FastAPI with Gemini/PyTorch integrations for the ML model and the chatbot interface.
 
 
