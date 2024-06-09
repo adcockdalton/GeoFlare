@@ -16,6 +16,8 @@ type PropertyProps = {
   image_url: string;
 };
 
+// UNUSED
+
 const properties = [
   {
     address: "123 Main Street",

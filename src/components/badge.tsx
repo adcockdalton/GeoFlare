@@ -7,6 +7,9 @@ interface BadgeProps {
   children?: React.ReactNode;
   style?: string;
 }
+
+// UNUSED
+
 function Badge(props: BadgeProps) {
   return (
     <div className="flex justify-between text-sm font-medium items-center whitespace-nowrap">

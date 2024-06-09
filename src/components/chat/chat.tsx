@@ -11,13 +11,33 @@ import { useChat } from "ai/react";
 import { motion } from "framer-motion";
 import { ArrowUp, Loader2 } from "lucide-react";
 
+/**
+ * Represents a chat component for live chat functionality.
+ * @returns The rendered chat component.
+ */
+
 export default function Chat() {
+  /**
+   * Represents a chat component that displays messages and allows users to input and submit messages.
+   *
+   * @remarks
+   * This component uses the `useChat` hook to handle chat functionality.
+   *
+   * @param api - The API endpoint for retrieving chat messages.
+   * @returns An object containing the chat messages, input value, input change handler, and submit handler.
+   */
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "api/gemini/",
   });
 
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    /**
+     * Scrolls the component into view using smooth scrolling.
+     * @remarks
+     * This function uses the `scrollIntoView` method to scroll the component into view.
+     * @param ref - The ref of the component to scroll into view.
+     */
     const scrollIntoViewInterval = () => {
       if (ref.current) {
         ref.current.scrollIntoView({

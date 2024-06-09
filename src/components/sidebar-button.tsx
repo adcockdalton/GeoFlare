@@ -7,6 +7,12 @@ interface Props {
   url: string;
   selected: boolean;
 }
+/**
+ * Renders a sidebar button component.
+ *
+ * @param {Props} props - The props for the SidebarButton component.
+ * @returns {JSX.Element} The rendered SidebarButton component.
+ */
 function SidebarButton(props: Props) {
   return (
     <Link href={"/" + props.url}>
