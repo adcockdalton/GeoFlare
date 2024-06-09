@@ -10,8 +10,6 @@ You can view the platform at: https://geo-flare-tpxz.vercel.app/
 
 ## Tech Stack
 
-For the front-end, we used TypeScript, React, Next.js, Node.js, and Figma.
-For the backend, we used Node.js, FireBase, Python, and FastAPI. 
-
+ The front end was created using React, SASS (for the landing page), Tailwind.css, Typescript, and Next.js. The backend was developed using Node.js, FireBase, Python, and FastAPI with Gemini/pytorch integrations for the ML model and the chatbot interface.
 
 
