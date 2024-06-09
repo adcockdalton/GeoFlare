@@ -2,10 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge";
 
+/**
+ * Handles the POST request to the Gemini API endpoint.
+ * 
+ * @param request - The NextRequest object representing the incoming request.
+ * @returns A NextResponse object with the response data and status code.
+ */
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const reqJSON = await request.json();
+  //Parse the JSON body of the incoming request
+  const reqJSON  = await request.json();
   const question = reqJSON.messages.at(-1).content;
 
+
+  // Check if the GEMINI_API_KEY environment variable is set
   if (!process.env.GEMINI_API_KEY) {
     return NextResponse.json(
       {
@@ -16,10 +26,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const API_KEY = process.env.GEMINI_API_KEY;
-
+  // Construct the Gemini API endpoint
+  const API_KEY        = process.env.GEMINI_API_KEY;
   const GeminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
+  // Check if the request body is present
   if (!request.body) {
     return NextResponse.json(
       {
@@ -29,6 +40,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // Construct the body for the Gemini API request
   const RequestBody = {
     contents: [
       {
@@ -73,16 +85,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     },
   };
 
+  // Send a POST request to the Gemini API with the constructed body
   const res = await fetch(GeminiEndpoint, {
     method: "POST",
     body: JSON.stringify(RequestBody),
   });
 
+  // Parse teh Gemini API response as JSON
   const geminiRes = await res.json();
 
   let geminiTextArray = null;
   try {
-    geminiTextArray = geminiRes.candidates[0].content.parts;
+    // Extract the generated content from the Gemini API response
+    geminiTextArray  = geminiRes.candidates[0].content.parts;
     const geminiText = geminiTextArray[0].text;
     const geminiTextObject: {
       action: string;
@@ -90,6 +105,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       difficulty: string;
     }[] = JSON.parse(geminiText);
 
+    // Return a successful response with the generated content
     const nextRes = NextResponse.json(
       {
         data: geminiTextObject,
@@ -98,8 +114,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
     return nextRes;
   } catch (e) {
+    // Log any errors tht occur during the extraction process
     console.error("gem", geminiRes);
     console.error("e", e);
+
+    // Return a successful response with a default message if an error occurs
     return NextResponse.json(
       {
         data: `[{"action": "Consult your on-ground team leader for active assistance.","time": "5","difficulty": "easy"}]`,
