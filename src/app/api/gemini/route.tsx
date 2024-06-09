@@ -91,7 +91,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     body: JSON.stringify(RequestBody),
   });
 
-  // Parse teh Gemini API response as JSON
+  // Parse the Gemini API response as JSON
   const geminiRes = await res.json();
 
   let geminiTextArray = null;
