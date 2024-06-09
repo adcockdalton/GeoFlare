@@ -5,7 +5,7 @@ GeoFlare is a real-time platform that leveraged geospatial computer vision and a
 
 We were inspired by strides made in military defense startups like Palantir and Anduril to develop a comprehensive, action-based platform to allow firefighters to focus on saving lives, not planning strategy.
 
-You can view the platform at: https://geo-flare-tpxz.vercel.app/
+You can view the platform at: https://geo-flare.vercel.app/
 
 
 ## Tech Stack
