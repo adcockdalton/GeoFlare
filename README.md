@@ -7,7 +7,7 @@ We were inspired by strides made in military defense startups like Palantir and 
 
 You can view the platform at: https://geo-flare.vercel.app/
 
-![alt text](https://github.com/[adcockdalton]/[GeoFlare]/blob/[branch]/app_image.png?raw=true)
+![alt text](https://github.com/[adcockdalton]/[GeoFlare]/blob/[main]/app_image.png?raw=true)
 
 ## Tech Stack
 
